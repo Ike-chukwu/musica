@@ -1,0 +1,33 @@
+/* div {
+    width: 100%;
+    margin-bottom: 1rem;
+
+}
+
+label {
+    font-size: 1.6rem;
+    text-transform: capitalize;
+    display: block;
+    margin-bottom: .5rem;
+    color: white;
+}
+
+input {
+    width: 100%;
+    padding: 1rem;
+}
+
+p {
+    color: rgb(250, 80, 80);
+    font-size: 1.4rem;
+    display: none;
+}
+
+
+input:invalid[focused="true"]~p {
+    display: block;
+}
+
+input:invalid[focused="true"] {
+    border: .1rem solid red;
+} */

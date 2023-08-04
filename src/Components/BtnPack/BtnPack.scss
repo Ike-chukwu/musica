@@ -1,0 +1,55 @@
+.btns {
+  margin-top: 5rem;
+  display: flex;
+  gap: 3rem;
+
+  .button {
+    padding: 1rem;
+    text-transform: capitalize;
+    background: transparent;
+    border-radius: 2.7rem;
+    width: 12rem;
+    font-size: 1.4rem;
+    color: hsla(56, 32%, 91%, 1);
+    border: 0.1rem solid hsla(56, 32%, 91%, 1);
+    cursor: pointer;
+
+    &:nth-child(2) {
+      width: 8.4rem;
+    }
+
+    &.active {
+      background: hsla(42, 94%, 69%, 1);
+      color: black;
+    }
+  }
+}
+
+@media (max-width: 970px) {
+  .btns {
+    width: 100%;
+    margin-block: 2rem;
+    padding-inline: 2rem;
+    width: 100%;
+    justify-content: space-between;
+    .button {
+      width: 48%;
+
+      &:nth-child(2) {
+        width: 48%;
+      }
+    }
+  }
+}
+
+// @media (max-width: 700px) {
+//   .btns {
+//     width: 100%;
+//     .button {
+//       width: 49%;
+//       &:nth-child(2) {
+//         width: 49%;
+//       }
+//     }
+//   }
+// }

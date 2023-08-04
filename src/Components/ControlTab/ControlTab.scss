@@ -1,0 +1,101 @@
+.controls {
+  background: hsla(0, 0%, 6%, 0.51);
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 4rem;
+  display: flex;
+  justify-content: space-between;
+  color: white;
+
+  .music-details {
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    img {
+      width: 60px;
+      height: 60px;
+      border-radius: 1.4rem;
+    }
+
+    .song-name {
+      font-size: 1.4rem;
+      font-weight: 700;
+    }
+    .artist {
+      font-size: 1.2rem;
+      color: hsla(0, 0%, 100%, 0.44);
+    }
+  }
+
+  .play-controls {
+    flex: 0.8;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+
+    .top {
+      align-self: center;
+      display: flex;
+      gap: 4rem;
+      font-size: 2rem;
+      align-items: center;
+
+      i {
+        cursor: pointer;
+      }
+
+      .fa-play {
+        background: hsla(42, 94%, 69%, 1);
+        padding: 1rem;
+        border-radius: 2rem;
+        font-size: 1rem;
+      }
+    }
+  }
+
+  .volume-controls {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+}
+
+@media (max-width: 1000px) {
+  .controls {
+    padding: 2rem;
+
+    .play-controls {
+      flex: 0.6;
+      
+    }
+  }
+}
+
+@media (max-width: 970px) {
+  .controls {
+    .play-controls {
+      flex: unset;
+    }
+  }
+}
+
+@media (max-width: 730px) {
+  .controls {
+    .play-controls {
+      flex: unset;
+
+      .top{
+        gap: 2rem;
+      }
+    }
+    .volume-controls, input[type='range'], .fa-repeat,  .fa-caret-left, .fa-shuffle{
+      display: none;
+    }
+  }
+}

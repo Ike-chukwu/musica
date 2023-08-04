@@ -1,0 +1,63 @@
+.sideNav {
+  display: none;
+}
+
+@media (max-width: 970px) {
+  .sideNav {
+    display: unset;
+    position: fixed;
+    left: -100vw;
+    top: 0;
+    bottom: 0;
+    z-index: 10;
+    background: hsla(192, 9%, 11%, 1);
+    width: 340px;
+    transition: all 0.4s ease-in-out;
+
+    &.active {
+      left: 0;
+    }
+
+    .link-pack {
+      padding-left: 2rem;
+      margin-top: 5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 4rem;
+
+      li {
+        list-style: none;
+        color: hsla(56, 32%, 91%, 0.25);
+        display: flex;
+        align-items: center;
+        gap: 3rem;
+
+        &:hover {
+          cursor: pointer;
+          i {
+            color: hsla(42, 94%, 69%, 1);
+            cursor: pointer;
+          }
+        }
+
+        i {
+          width: 10px;
+          font-size: 2rem;
+          height: 2rem;
+        }
+
+        span {
+          text-transform: capitalize;
+          font-size: 1.5rem;
+          display: block;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 650px) {
+  .sideNav {
+    width: 250px;
+  }
+}

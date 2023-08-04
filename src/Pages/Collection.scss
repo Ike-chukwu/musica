@@ -1,0 +1,11 @@
+.collection {
+  width: 100%;
+  padding-right: 4.5rem;
+}
+
+@media (max-width: 970px) {
+  .collection {
+    width: 100%;
+    padding-right: 0;
+  }
+}

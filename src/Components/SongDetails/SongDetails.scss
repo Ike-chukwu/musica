@@ -1,0 +1,13 @@
+.songDetails {
+  width: 100%;
+  min-height: 100vh;
+  padding-right: 4.5rem;
+}
+
+
+
+@media (max-width:970px){
+  .songDetails {
+    padding-right: 0;
+  }
+}

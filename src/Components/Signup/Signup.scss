@@ -1,0 +1,29 @@
+.container {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  background: hsla(200, 9%, 13%, 0.8), hsla(200, 9%, 13%, 1);
+
+  .signin {
+    width: 400px;
+    margin-top: 10rem;
+
+    h2 {
+      text-transform: capitalize;
+      font-size: 3rem;
+      text-align: center;
+      margin-bottom: 3rem;
+      color: white;
+    }
+
+    form {
+      button {
+        width: 100%;
+        padding: 1rem;
+        margin-top: 2rem;
+        background: black;
+        color: white;
+      }
+    }
+  }
+}

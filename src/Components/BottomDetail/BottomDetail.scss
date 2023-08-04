@@ -1,0 +1,103 @@
+.b-detail {
+  margin-top: 5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  .music-card {
+    background: hsla(210, 7%, 22%, 0.37);
+    border-radius: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    color: white;
+
+    p {
+      font-size: 1.2rem;
+    }
+    .img-like {
+      display: flex;
+      gap: 10rem;
+      align-items: center;
+      .inner {
+        display: flex;
+        align-items: center;
+        gap: 3rem;
+        color: white;
+        img {
+          width: 60px;
+          height: 60px;
+          border-radius: 0.9rem;
+        }
+        .text {
+          display: none;
+        }
+      }
+    }
+
+    .options {
+      .options-btn {
+        font-size: 1.8rem;
+        color: hsla(42, 94%, 69%, 1);
+      }
+      .music-opt {
+        display: none;
+      }
+    }
+  }
+}
+
+@media (max-width: 970px) {
+  .b-detail {
+    .music-card {
+      .img-like {
+        gap: unset;
+        .inner {
+          gap: 2rem;
+          .fa-heart {
+            display: none;
+          }
+          img {
+            width: 60px;
+            height: 60px;
+            border-radius: 0.9rem;
+          }
+          .text {
+            display: unset;
+            display: flex;
+            gap: 0.5rem;
+            flex-direction: column;
+            font-size: 1.2rem;
+          }
+        }
+
+        .song-text {
+          display: none;
+        }
+      }
+
+      .category,
+      .duration {
+        display: none;
+      }
+
+      .options {
+        .options-btn {
+          display: none;
+        }
+        .music-opt {
+          display: flex;
+          flex-direction: column;
+          font-size: 1.2rem;
+          align-items: center;
+          gap: 1rem;
+          .options-btn-2 {
+            font-size: 1.6rem;
+            color: hsla(42, 94%, 69%, 1);
+          }
+        }
+      }
+    }
+  }
+}
