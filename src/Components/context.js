@@ -14,18 +14,19 @@ export const AuthProvider = ({ children }) => {
   //state that stores sidenav status
   const [isSideNavActive, setSideNav] = useState(false);
   const [user, setUser] = useState({});
+  const [username, setUsername] = useState("");
 
   const createUser = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
   const signIn = (email, password) => {
-    return signInWithEmailAndPassword(auth, email, password)
-  }
+    return signInWithEmailAndPassword(auth, email, password);
+  };
 
   const logout = () => {
-    return signOut(auth)
-  }
+    return signOut(auth);
+  };
 
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -43,7 +44,9 @@ export const AuthProvider = ({ children }) => {
         createUser,
         user,
         logout,
-        signIn
+        signIn,
+        setUsername,
+        username
       }}
     >
       {children}

@@ -5,11 +5,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context";
 
 const Signup = (props) => {
-  const { createUser } = useContext(AuthContext);
-  const navigate = useNavigate()
+  const { createUser,setUsername } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const [data, setData] = useState({
-    name: "",
+    username: "",
     email: "",
     password: "",
     c_password: "",
@@ -30,9 +30,12 @@ const Signup = (props) => {
     setError("");
     const email = data.email;
     const password = data.password;
+    const username = data.username;
+    console.log(username);
     try {
       await createUser(email, password);
-      navigate('/profile')
+      setUsername(username)
+      navigate("/");
     } catch (e) {
       setError(e.message);
       console.log(error);
@@ -40,6 +43,13 @@ const Signup = (props) => {
   };
 
   const inputFields = [
+    {
+      placeholder: "Enter your preferred username",
+      required: true,
+      name: "username",
+      type: "text",
+      errorMessage: "Name is too short",
+    },
     {
       placeholder: "Enter your email",
       required: true,

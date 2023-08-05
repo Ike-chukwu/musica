@@ -10,7 +10,7 @@
   i {
     color: hsla(56, 32%, 91%, 0.25);
     font-size: 2rem;
-    transition: color .3s linear;
+    transition: color 0.3s linear;
 
     &:hover {
       color: hsla(42, 94%, 69%, 1);
@@ -18,6 +18,10 @@
     }
   }
 
+  .selected {
+    color: hsla(42, 94%, 69%, 1);
+    cursor: pointer;
+  }
   .top {
     display: flex;
     flex-direction: column;
@@ -42,9 +46,7 @@
   }
 }
 
-
-
-@media(max-width:970px){
+@media (max-width: 970px) {
   .sideBar {
     display: none;
   }

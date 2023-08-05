@@ -25,6 +25,10 @@
       flex-direction: column;
       gap: 4rem;
 
+      .selected {
+        color: hsla(42, 94%, 69%, 1);
+        cursor: pointer;
+      }
       li {
         list-style: none;
         color: hsla(56, 32%, 91%, 0.25);
