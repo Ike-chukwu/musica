@@ -9,14 +9,16 @@ const Sidebar = () => {
         <Link to="/">
           <i className="fas fa-home"></i>
         </Link>
-        <Link to='/collection'>
+        <Link to="/collection">
           <i className="fas fa-box"></i>
         </Link>
         <i className="fas fa-radio"></i>
         <i className="fas fa-video"></i>
       </div>
       <div className="bottom">
-        <i className="fas fa-user"></i>
+        <Link to='/profile'>
+          <i className="fas fa-user"></i>
+        </Link>
         <i className="fas fa-sign-in"></i>
       </div>
     </div>

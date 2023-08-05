@@ -1,32 +1,45 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "./Signup.scss";
 import Input from "../Input/Input";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../context";
 
-const Signup = () => {
+const Signup = (props) => {
+  const { createUser } = useContext(AuthContext);
+  const navigate = useNavigate()
+
   const [data, setData] = useState({
     name: "",
     email: "",
-    street: "",
     password: "",
     c_password: "",
   });
 
+  const [error, setError] = useState("");
+
   const onChangeHandler = (e, id) => {
     const name = e.target.name;
-    console.log(name);
     setData({
       ...data,
       [name]: e.target.value,
     });
   };
 
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault();
-    console.log("yes");
+    setError("");
+    const email = data.email;
+    const password = data.password;
+    try {
+      await createUser(email, password);
+      navigate('/profile')
+    } catch (e) {
+      setError(e.message);
+      console.log(error);
+    }
   };
 
   const inputFields = [
-
     {
       placeholder: "Enter your email",
       required: true,
@@ -72,8 +85,14 @@ const Signup = () => {
               />
             );
           })}
-          <button>Submit</button>
+          <button>Sign Up</button>
         </form>
+        <span>
+          Already have an account?{" "}
+          <Link to="/" style={{ color: "white" }}>
+            Sign in
+          </Link>
+        </span>
       </div>
     </div>
   );

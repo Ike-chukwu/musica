@@ -7,11 +7,12 @@
   .signin {
     width: 400px;
     margin-top: 10rem;
+    position: relative;
 
     h2 {
       text-transform: capitalize;
       font-size: 3rem;
-      text-align: center;
+      text-align: left;
       margin-bottom: 3rem;
       color: white;
     }
@@ -21,9 +22,21 @@
         width: 100%;
         padding: 1rem;
         margin-top: 2rem;
-        background: black;
-        color: white;
+        background: hsla(42, 94%, 69%, 1);
+        color: black;
       }
+    }
+
+    span {
+      color: white;
+      font-size: 1.4rem;
+      position: absolute;
+      bottom: 10%;
+      left: 50%;
+      text-align: center;
+      transform: translateX(-50%);
+      width: 100%;
+      text-decoration: underline;
     }
   }
 }

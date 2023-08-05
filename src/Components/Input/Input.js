@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
-import './Input.css'
+import styles from './Input.module.css'
+
 
 const Input = (props) => {
 
@@ -11,10 +12,10 @@ const Input = (props) => {
     }
 
   return (
-    <div key={props.key}>
+    <div className={styles.div} key={props.key}>
         <label htmlFor="">{props.name}</label>
         <input type={props.type} {...props} onBlur={blurFlunc} focused={focus.toString()} onChange={(e) => props.inputTrigger(e, props.name)}  />
-        <p>{props.errorMessage}</p>
+        <p className={styles.paragraph}>{props.errorMessage}</p>
     </div>
   )
 }
