@@ -12,7 +12,8 @@ import Radio from "../src/Pages/Radio";
 import SideNav from "./Components/SideNav/SideNav";
 import ControlTab from "./Components/ControlTab/ControlTab";
 import SongDetails from "./Components/SongDetails/SongDetails";
-import { useEffect, useState } from "react";
+import { useEffect,useCallback, useState, useContext, useRef } from "react";
+import { AuthContext } from "./Components/context";
 
 function App() {
   const status = localStorage.getItem("status") || "";
@@ -21,13 +22,43 @@ function App() {
   const [loggedIn, setLogin] = useState(loginState);
   const [state, setStaate] = useState(status);
 
-  // useEffect(() => {
+  const {
+    musicList,
+    setCurrentSong,
+    setMusic,
+    currentSong,
+    isPlaying,
+    setisPlaying,
+    musicRef,
+    nextSong,
+    audioElement,
+    loop
+  } = useContext(AuthContext);
 
-  // }, [state])
 
+  
+
+  
+
+  const onLoadedMetadata = () => {
+    const seconds = audioElement.current.duration;
+    setDuration(seconds);
+    musicRef.current.max = seconds;
+
+  };
+
+
+
+
+ 
+
+  const [timeProgress, setTimeProgress] = useState(0);
+  const [duration, setDuration] = useState(0);
+
+  // console.log(currentSong);
   return (
     <div className="App">
-      {loggedIn && state == 'signedIn' ? (
+      {loggedIn && state == "signedIn" ? (
         <>
           <Navbar />
           <SideNav />
@@ -43,7 +74,8 @@ function App() {
                 element={<Profile setLog={setLogin} loggedIn={loggedIn} />}
               />{" "}
             </Routes>
-            <ControlTab />
+            <audio  onLoadedMetadata={onLoadedMetadata} src={currentSong.src} ref={audioElement} onEnded={nextSong}></audio>
+            <ControlTab duration={duration} setTimeProgress={setTimeProgress} audioElement={audioElement}/>
           </div>
         </>
       ) : (

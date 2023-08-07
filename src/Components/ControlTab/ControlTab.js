@@ -1,31 +1,124 @@
-import React from "react";
+import React, {
+  useContext,
+  useState,
+  useRef,
+  useCallback,
+  useEffect,
+} from "react";
 import "./ControlTab.scss";
 import imageTry from "../../images/Rectangle 14.jpg";
+import { AuthContext } from "../context";
 
-const ControlTab = () => {
+const ControlTab = (props) => {
+  const {
+    musicList,
+    setCurrentSong,
+    setMusic,
+    nextSong,
+    currentSong,
+    isPlaying,
+    setisPlaying,
+    musicRef,
+    prevSong,
+    audioElement,
+    repeatSong,
+    isRepeatedClicked,
+    shuffleSong
+  } = useContext(AuthContext);
+
+  //state that controls volume
+  const [volume, setVolume] = useState(60);
+
+  const [mute, setMute] = useState(false)
+
+
+
+
+//monitiors the song progress
+  const playAnimationRef = useRef();
+  const repeat = useCallback(() => {
+    const currentTime = audioElement.current.currentTime;
+    props.setTimeProgress(currentTime);
+    musicRef.current.value = currentTime;
+    musicRef.current.style.setProperty(
+      "$range-progress",
+      `${(musicRef.current.value / props.duration) * 100}%`
+    );
+
+    playAnimationRef.current = requestAnimationFrame(repeat);
+  }, [audioElement, props.duration, musicRef]);
+
+
+  //monitors the play/pause state of the music player
+  useEffect(() => {
+    if (isPlaying) {
+      audioElement.current.play();
+    } else {
+      audioElement.current.pause();
+    }
+    playAnimationRef.current = requestAnimationFrame(repeat);
+  }, [isPlaying, repeat]);
+
+
+
+  //function that toggles between play/pause
+  const handleClick = () => {
+    setisPlaying(!isPlaying);
+  };
+
+  //function that assigns the value of the input to the current time
+  const handleProgressChange = () => {
+    audioElement.current.currentTime = musicRef.current.value;
+  };
+ 
+ 
+
+  //adjusts the volume and mute state when the volume is changed
+  useEffect(() => {
+    if(audioElement){
+      audioElement.current.volume = volume / 100;
+      audioElement.current.muted = mute;
+    }
+  }, [volume, audioElement, mute]);
+
+
+
   return (
     <div className="controls">
       <div className="music-details">
-        <img src={imageTry} alt="" />
+        <img src={currentSong.img} alt="" />
         <div className="info">
-          <p className="song-name">Seasons in</p>
+          <p className="song-name">{currentSong.name}</p>
           <p className="artist">Aitch</p>
         </div>
       </div>
       <div className="play-controls">
         <div className="top">
-          <i class="fas fa-shuffle"></i>
-          <i class="fa fa-caret-left"></i>
-          <i class="fas fa-play"></i>
+          <i onClick={shuffleSong} class="fas fa-shuffle"></i>
+          <i class="fa fa-caret-left" onClick={prevSong}></i>
+          <i
+            onClick={handleClick}
+            class={isPlaying ? "fas fa-pause" : "fas fa-play"}
+          ></i>
           {/* <i class="fas fa-pause"></i> */}
-          <i class="fa fa-caret-right"></i>
-          <i class="fa fa-repeat"></i>
+          <i class="fa fa-caret-right" onClick={nextSong}></i>
+          <i class="fa fa-repeat" onClick={repeatSong}></i>
         </div>
-        <input type="range" />
+        <input
+          defaultValue="0"
+          onChange={handleProgressChange}
+          ref={musicRef}
+          type="range"
+        />
       </div>
       <div className="volume-controls">
-        <i class="fas fa-volume-up"></i>
-        <input type="range" />
+        <i onClick={()=> setMute(!mute)} class={mute || volume <= 0 ? "fas fa-volume-mute":"fas fa-volume-up"}></i>
+        <input
+          type="range"
+          min={0}
+          max={100}
+          onChange={(e) => setVolume(e.target.value)}
+        />
       </div>
     </div>
   );

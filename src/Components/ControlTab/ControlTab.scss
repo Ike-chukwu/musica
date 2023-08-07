@@ -1,5 +1,8 @@
+$range-progress: 0%;
+
 .controls {
   background: hsla(0, 0%, 6%, 0.51);
+  backdrop-filter: blur(15px);
   position: fixed;
   bottom: 0;
   left: 0;
@@ -39,6 +42,45 @@
     justify-content: center;
     gap: 2rem;
 
+    input[type="range"] {
+      -webkit-appearance: none;
+      position: relative;
+      background: #ccc;
+      width: 100%;
+      height: 2px;
+      border-radius: 2px;
+      cursor: pointer;
+
+      &::before {
+        content: "";
+        height: 2px;
+        background: #f50;
+        width:$range-progress;
+        border-bottom-left-radius: 2px;
+        border-top-left-radius: 2px;
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        &::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          height: 8px;
+          width: 8px;
+          border-radius: 50%;
+          border: none;
+          background-color: #f50;
+          cursor: pointer;
+          position: relative;
+
+          &:active {
+            &::-webkit-slider-thumb {
+              transform: scale(1.2);
+            }
+          }
+        }
+      }
+    }
+
     .top {
       align-self: center;
       display: flex;
@@ -51,6 +93,12 @@
       }
 
       .fa-play {
+        background: hsla(42, 94%, 69%, 1);
+        padding: 1rem;
+        border-radius: 2rem;
+        font-size: 1rem;
+      }
+      .fa-pause {
         background: hsla(42, 94%, 69%, 1);
         padding: 1rem;
         border-radius: 2rem;
@@ -72,7 +120,6 @@
 
     .play-controls {
       flex: 0.6;
-      
     }
   }
 }
@@ -90,11 +137,15 @@
     .play-controls {
       flex: unset;
 
-      .top{
+      .top {
         gap: 2rem;
       }
     }
-    .volume-controls, input[type='range'], .fa-repeat,  .fa-caret-left, .fa-shuffle{
+    .volume-controls,
+    input[type="range"],
+    .fa-repeat,
+    .fa-caret-left,
+    .fa-shuffle {
       display: none;
     }
   }
