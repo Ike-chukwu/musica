@@ -32,6 +32,14 @@ export const AuthProvider = ({ children }) => {
   const [isPlaying, setisPlaying] = useState(false);
   const [isRepeatClicked, setIsRepeatClicked] = useState(false);
 
+  //different states for api calls
+  //for new releases section
+  const [title, setTitle] = useState();
+  const [mData, setMdata] = useState();
+
+  const [globalMusicData, setGlobalMusicData] = useState();
+
+  const [dataType, setDataType] = useState(null)
   // ref of progress bar
   const musicRef = useRef();
   //ref of auio element
@@ -51,39 +59,40 @@ export const AuthProvider = ({ children }) => {
 
   //function that plays the next song
   const nextSong = () => {
-    let index = musicList.findIndex((music) => music.name == currentSong.name);
-    if (index >= musicList.length - 1) {
+    let index = mData.findIndex((music) => music.name == currentSong.name);
+    if (index >= mData.length - 1) {
       index = 0;
-      setCurrentSong(musicList[index]);
+      setCurrentSong(mData[index]);
     } else {
       index++;
       console.log(currentSong);
-      setCurrentSong(musicList[index]);
+      setCurrentSong(mData[index]);
     }
   };
 
   //function that plays the previous song
   const prevSong = () => {
-    let index = musicList.findIndex((music) => music.name == currentSong.name);
+    let index = mData.findIndex((music) => music.name == currentSong.name);
     if (index <= 0) {
-      index = musicList.length - 1;
-      setCurrentSong(musicList[index]);
+      index = mData.length - 1;
+      setCurrentSong(mData[index]);
     } else {
       index--;
       console.log(currentSong);
-      setCurrentSong(musicList[index]);
+      setCurrentSong(mData[index]);
     }
   };
 
   //function that repeats the previous song that was played
   const repeatSong = () => {
-    audioElement.current.currentTime = 0;
+    // audioElement.current.currentTime = 0;
+    setIsRepeatClicked(!isRepeatClicked);
   };
 
   //function that picks any rnadom song
   const shuffleSong = () => {
-    const randomNumber = Math.floor(Math.random() * musicList.length);
-    setCurrentSong(musicList[randomNumber]);
+    const randomNumber = Math.floor(Math.random() * mData.length);
+    setCurrentSong(mData[randomNumber]);
   };
 
   useEffect(() => {
@@ -93,6 +102,35 @@ export const AuthProvider = ({ children }) => {
     });
     return () => unSubscribe();
   }, []);
+
+  //api call
+  // const fetchData = async () => {
+  //   const url = "https://deezerdevs-deezer.p.rapidapi.com/playlist/1257036831";
+  //   const options = {
+  //     method: "GET",
+  //     headers: {
+  //       "X-RapidAPI-Key": "83d16f10efmsh798c2687b6a1e69p1861cejsnb955344b3b13",
+  //       "X-RapidAPI-Host": "deezerdevs-deezer.p.rapidapi.com",
+  //     },
+  //   };
+
+  //   try {
+  //     const response = await fetch(url, options);
+  //     const result = await response.json();
+  //     const { title, tracks } = result;
+  //     setTitle(title);
+  //     const trackList = tracks.data;
+  //     setMdata(trackList);
+  //     // console.log(trackList);
+  //     console.log(title);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
 
   return (
     <AuthContext.Provider
@@ -105,7 +143,7 @@ export const AuthProvider = ({ children }) => {
         signIn,
         setUsername,
         username,
-        musicList,
+        mData,
         setCurrentSong,
         setMusic,
         currentSong,
@@ -119,6 +157,12 @@ export const AuthProvider = ({ children }) => {
         isRepeatClicked,
         setIsRepeatClicked,
         shuffleSong,
+        title,
+        mData,
+        globalMusicData,
+        setGlobalMusicData,
+        dataType, setDataType,
+        setMdata,
       }}
     >
       {children}

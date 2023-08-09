@@ -1,11 +1,103 @@
 import React from "react";
 import "./BottomDetail.scss";
 import img from "../../images/Lead-image.jpg";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../context";
 
-const BottomDetail = () => {
+const BottomDetail = (props) => {
+  const { dataType, currentSong, setCurrentSong,mData, setMdata, isPlaying, setisPlaying, audioElement, nextSong } = useContext(AuthContext);
+
+  const [image, setImg] = useState();
+  const [tracks, setTracks] = useState();
+  const [duartion, setDuration] = useState();
+  const [aName, setAName] = useState();
+  const [type, setType] = useState();
+
+  let songRender;
+
+  useEffect(() => {
+    if (props.data) {
+      if (dataType == "album") {
+        setTracks(props.data.tracks);
+        setImg(props.data.albumImg);
+        setAName(props.data.artistName);
+        setType(dataType);
+      }
+      else if (props.data) {
+        if (dataType == "track") {
+          console.log(props.data);
+          console.log('you');
+          setTracks(props.data.tracks);
+          setImg(props.data.albumImg);
+          setAName(props.data.artistName);
+          setType(dataType);
+        }
+      }
+    }
+  }, [props.data]);
+
+  useEffect(() => {
+    if (isPlaying) {
+      audioElement.current.play(); // Play the audio when isPlaying becomes true
+    }
+  }, [isPlaying]);
+
+
+  
+  
+
+
+
+  const playSong = (img,trackName,artist,songLink) => {
+    console.log(isPlaying);
+    setisPlaying(true)
+    const musicDetails = {
+      name:trackName,
+      src:songLink,
+      img:img,
+      arTistName:artist
+    }
+    setCurrentSong(musicDetails)
+    // setIsPlaying(!isPlaying)
+  }
+
+  if (tracks) {
+    songRender = tracks.map((track) => {
+      return (
+        <div className="music-card" onClick={() => playSong(image,track.name,aName, track.preview_url )}>
+          <div className="img-like">
+            <div className="inner">
+              <img src={image} alt="" />
+              <i className="fas fa-heart"></i>
+              <div className="text">
+                <p>
+                  {track.name}~ {aName}
+                </p>
+                <p>Single</p>
+              </div>
+            </div>
+            <p className="song-text">
+              {track.name}~ {aName}
+            </p>
+          </div>
+          <p className="category">Single</p>
+          <p className="duration">{track.duration_ms}</p>
+          <div className="options">
+            <span className="options-btn">:</span>
+            <div className="music-opt">
+              <span className="options-btn-2">:</span>
+              <span className="time">{track.duration_ms}</span>
+            </div>
+          </div>
+        </div>
+      );
+    });
+  }
+
   return (
     <div className="b-detail">
-      <div className="music-card">
+      {songRender}
+      {/* <div className="music-card">
         <div className="img-like">
           <div className="inner">
             <img src={img} alt="" />
@@ -70,7 +162,7 @@ const BottomDetail = () => {
             <span className="time">4:07</span>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

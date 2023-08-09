@@ -32,7 +32,7 @@ function App() {
     musicRef,
     nextSong,
     audioElement,
-    loop
+    isRepeatClicked
   } = useContext(AuthContext);
 
 
@@ -66,7 +66,7 @@ function App() {
             <Sidebar />
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/song" element={<SongDetails />} />
+              <Route path="/song/:id" element={<SongDetails />} />
               <Route path="/collection" element={<Collection />} />
               <Route path="/logout" element={<Logout />} />
               <Route
@@ -74,7 +74,11 @@ function App() {
                 element={<Profile setLog={setLogin} loggedIn={loggedIn} />}
               />{" "}
             </Routes>
+            {
+              isRepeatClicked ?
+            <audio  onLoadedMetadata={onLoadedMetadata} src={currentSong.src} ref={audioElement} onEnded={nextSong} loop></audio> :
             <audio  onLoadedMetadata={onLoadedMetadata} src={currentSong.src} ref={audioElement} onEnded={nextSong}></audio>
+            }
             <ControlTab duration={duration} setTimeProgress={setTimeProgress} audioElement={audioElement}/>
           </div>
         </>

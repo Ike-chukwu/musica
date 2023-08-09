@@ -89,7 +89,7 @@ const ControlTab = (props) => {
         <img src={currentSong.img} alt="" />
         <div className="info">
           <p className="song-name">{currentSong.name}</p>
-          <p className="artist">Aitch</p>
+          <p className="artist">{currentSong.arTistName}</p>
         </div>
       </div>
       <div className="play-controls">
