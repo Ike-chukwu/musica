@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./SongDetails.scss";
-import img from "../../images/AlbumCard-3.jpg";
 import TopDetail from "../TopDetail/TopDetail";
 import BottomDetail from "../BottomDetail/BottomDetail";
 import { useParams } from "react-router-dom";
@@ -59,10 +58,10 @@ const SongDetails = () => {
         };
         setMdata(objOfTracks);
         setDataToBePassed({albumImg,artistName,name, total_tracks:1, tracks:[{duration_ms, name,preview_url}]})
-        console.log(dataToBePassed);
       }
     }
   }, [globalMusicData]);
+  
 
   return (
     <div

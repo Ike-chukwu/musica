@@ -1,8 +1,12 @@
-import React, { useState, useRef, useEffect, useContext, useCallback } from "react";
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  useContext,
+  useCallback,
+} from "react";
 import "./Slider.css";
-import imageTry from "../../images/Rectangle 14.jpg";
 import { Link, useNavigate } from "react-router-dom";
-import { color } from "framer-motion";
 import { AuthContext } from "../context";
 
 const Slider = (props) => {
@@ -60,13 +64,20 @@ const Slider = (props) => {
       itemsContainer.current.scrollLeft = scrollLeftState - mouseMoved;
     }
   }, [scrollLeftState, mouseMoved, isDown]);
-
+  
+  
   //fetching data
-  const {globalMusicData, setGlobalMusicData,dataType, setDataType, mData, setMdata} = useContext(AuthContext);
+  const {
+    globalMusicData,
+    setGlobalMusicData,
+    dataType,
+    setDataType,
+    mData,
+    setMdata,
+  } = useContext(AuthContext);
   const [playListData, setPlayListdata] = useState();
   const fetcher = async () => {
-    const url =
-      "https://spotify81.p.rapidapi.com/playlist_tracks?id=37i9dQZF1DWX0o6sD1a6P5&offset=0&limit=100";
+    const url = props.url;
     const options = {
       method: "GET",
       headers: {
@@ -74,13 +85,12 @@ const Slider = (props) => {
         "X-RapidAPI-Host": "spotify81.p.rapidapi.com",
       },
     };
-
     try {
       const response = await fetch(url, options);
       const result = await response.json();
-      const musicData = result.items
-      const trackData = musicData.map((item) => item.track)
-      return trackData
+      const musicData = result.items;
+      const trackData = musicData.map((item) => item.track);
+      return trackData;
       // setPlayListdata(trackData)
     } catch (error) {
       console.error(error);
@@ -88,26 +98,28 @@ const Slider = (props) => {
   };
 
   const fetchDataMemoized = useCallback(() => {
-    fetcher().then((result => {
-      setPlayListdata(result)
+    fetcher().then((result) => {
+      setPlayListdata(result);
       console.log(result);
-    }))
-  }, [])
+    });
+  }, []);
 
   useEffect(() => {
-    fetchDataMemoized()
-  }, [fetchDataMemoized ]);
- 
+    fetchDataMemoized();
+  }, [fetchDataMemoized]);
 
   let d;
   if (playListData) {
-    console.log(playListData);
     d = playListData.map((item) => {
       return (
         <Link
           to={`/song/${item.id}`}
           key={item.id}
-          onClick={(e) => {handleLinkClick(e, item); setGlobalMusicData(playListData); setDataType(item.type)  }}
+          onClick={(e) => {
+            handleLinkClick(e, item);
+            setGlobalMusicData(playListData);
+            setDataType(item.type);
+          }}
         >
           <div
             className="image"
@@ -147,7 +159,7 @@ const Slider = (props) => {
 
   return (
     <div className="overall-container">
-      <h3>Trendng Now</h3>
+      <h3>{props.category}</h3>
       <div
         ref={itemsContainer}
         className={isDown ? "item-container actived" : "item-container"}

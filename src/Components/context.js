@@ -23,12 +23,12 @@ export const AuthProvider = ({ children }) => {
   const [username, setUsername] = useState("");
 
   const [musicList, setMusic] = useState([
-    { name: "ukelele", src: ukelele, img: img1 },
-    { name: "summer", src: summer, img: img2 },
-    { name: "hey", src: hey, img: img3 },
+    // { name: "ukelele", src: ukelele, img: img1 },
+    // { name: "summer", src: summer, img: img2 },
+    // { name: "hey", src: hey, img: img3 },
   ]);
 
-  const [currentSong, setCurrentSong] = useState(musicList[0]);
+  const [currentSong, setCurrentSong] = useState();
   const [isPlaying, setisPlaying] = useState(false);
   const [isRepeatClicked, setIsRepeatClicked] = useState(false);
 
@@ -59,40 +59,61 @@ export const AuthProvider = ({ children }) => {
 
   //function that plays the next song
   const nextSong = () => {
-    let index = mData.findIndex((music) => music.name == currentSong.name);
-    if (index >= mData.length - 1) {
-      index = 0;
-      setCurrentSong(mData[index]);
-    } else {
-      index++;
-      console.log(currentSong);
-      setCurrentSong(mData[index]);
+    console.log(mData);
+    if(Array.isArray(mData) == false){
+      // console.log(mData);
+      audioElement.current.currentTime = 0;
+    }
+    else{
+      let index = mData.findIndex((music) => music.name == currentSong.name);
+      if (index >= mData.length - 1) {
+        index = 0;
+        setCurrentSong(mData[index]);
+      } else {
+        index++;
+        console.log(currentSong);
+        setCurrentSong(mData[index]);
+      }
+
     }
   };
 
   //function that plays the previous song
   const prevSong = () => {
-    let index = mData.findIndex((music) => music.name == currentSong.name);
-    if (index <= 0) {
-      index = mData.length - 1;
-      setCurrentSong(mData[index]);
-    } else {
-      index--;
-      console.log(currentSong);
-      setCurrentSong(mData[index]);
+    if(Array.isArray(mData) == false){
+      audioElement.current.currentTime = 0;
     }
+    else{
+      let index = mData.findIndex((music) => music.name == currentSong.name)
+      if (index <= 0) {
+        index = mData.length - 1;
+        setCurrentSong(mData[index]);
+      } else {
+        index--;
+        console.log(currentSong);
+        setCurrentSong(mData[index]);
+      }
+    }
+    // console.log(dataType);
+
   };
 
   //function that repeats the previous song that was played
   const repeatSong = () => {
+    console.log(isRepeatClicked);
     // audioElement.current.currentTime = 0;
     setIsRepeatClicked(!isRepeatClicked);
   };
 
   //function that picks any rnadom song
   const shuffleSong = () => {
-    const randomNumber = Math.floor(Math.random() * mData.length);
-    setCurrentSong(mData[randomNumber]);
+    if(Array.isArray(mData) == false){
+      audioElement.current.currentTime = 0;
+    }
+    else{
+      const randomNumber = Math.floor(Math.random() * mData.length);
+      setCurrentSong(mData[randomNumber]);
+    }
   };
 
   useEffect(() => {
@@ -103,34 +124,7 @@ export const AuthProvider = ({ children }) => {
     return () => unSubscribe();
   }, []);
 
-  //api call
-  // const fetchData = async () => {
-  //   const url = "https://deezerdevs-deezer.p.rapidapi.com/playlist/1257036831";
-  //   const options = {
-  //     method: "GET",
-  //     headers: {
-  //       "X-RapidAPI-Key": "83d16f10efmsh798c2687b6a1e69p1861cejsnb955344b3b13",
-  //       "X-RapidAPI-Host": "deezerdevs-deezer.p.rapidapi.com",
-  //     },
-  //   };
 
-  //   try {
-  //     const response = await fetch(url, options);
-  //     const result = await response.json();
-  //     const { title, tracks } = result;
-  //     setTitle(title);
-  //     const trackList = tracks.data;
-  //     setMdata(trackList);
-  //     // console.log(trackList);
-  //     console.log(title);
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   fetchData();
-  // }, []);
 
   return (
     <AuthContext.Provider

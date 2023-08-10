@@ -9,13 +9,7 @@ const Home = () => {
 
 
   const firstUrl = "https://spotify81.p.rapidapi.com/playlist_tracks?id=37i9dQZF1DWX0o6sD1a6P5&offset=0&limit=100"
-  const firstOptions = {
-    method: "GET",
-    headers: {
-      "X-RapidAPI-Key": "83d16f10efmsh798c2687b6a1e69p1861cejsnb955344b3b13",
-      "X-RapidAPI-Host": "spotify81.p.rapidapi.com",
-    },
-  }
+  const secondUrl = 'https://spotify81.p.rapidapi.com/playlist_tracks?id=37i9dQZF1DWUHcUDX0za7N&offset=0&limit=100'
 
 
 
@@ -23,8 +17,8 @@ const Home = () => {
   return (
     <div className="home">
       <Latest />
-      <Slider category={title} music={mData}/>
-      <Slider category="Popular in your area" />
+      <Slider category="Trending Now" url={firstUrl}/>
+      <Slider category="Naija Bars" url={secondUrl} />
     </div>
   );
 };

@@ -76,10 +76,13 @@ function App() {
             </Routes>
             {
               isRepeatClicked ?
-            <audio  onLoadedMetadata={onLoadedMetadata} src={currentSong.src} ref={audioElement} onEnded={nextSong} loop></audio> :
-            <audio  onLoadedMetadata={onLoadedMetadata} src={currentSong.src} ref={audioElement} onEnded={nextSong}></audio>
+            <audio  onLoadedMetadata={onLoadedMetadata} src={currentSong?currentSong.src :null} ref={audioElement} onEnded={nextSong} loop></audio> :
+            <audio  onLoadedMetadata={onLoadedMetadata} src={currentSong?currentSong.src :null} ref={audioElement} onEnded={nextSong}></audio>
             }
+            {
+              currentSong &&
             <ControlTab duration={duration} setTimeProgress={setTimeProgress} audioElement={audioElement}/>
+            }
           </div>
         </>
       ) : (

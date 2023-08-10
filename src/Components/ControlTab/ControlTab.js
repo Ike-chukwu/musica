@@ -51,13 +51,13 @@ const ControlTab = (props) => {
 
   //monitors the play/pause state of the music player
   useEffect(() => {
-    if (isPlaying) {
+    if (isPlaying && currentSong) {
       audioElement.current.play();
-    } else {
+    } else if(isPlaying == false) {
       audioElement.current.pause();
     }
     playAnimationRef.current = requestAnimationFrame(repeat);
-  }, [isPlaying, repeat]);
+  }, [isPlaying, repeat, currentSong]);
 
 
 
@@ -75,11 +75,11 @@ const ControlTab = (props) => {
 
   //adjusts the volume and mute state when the volume is changed
   useEffect(() => {
-    if(audioElement){
+    if(audioElement && currentSong){
       audioElement.current.volume = volume / 100;
       audioElement.current.muted = mute;
     }
-  }, [volume, audioElement, mute]);
+  }, [volume, audioElement, mute, currentSong]);
 
 
 
@@ -102,7 +102,7 @@ const ControlTab = (props) => {
           ></i>
           {/* <i class="fas fa-pause"></i> */}
           <i class="fa fa-caret-right" onClick={nextSong}></i>
-          <i class="fa fa-repeat" onClick={repeatSong}></i>
+          {/* <i class="fa fa-repeat" onClick={repeatSong}></i> */}
         </div>
         <input
           defaultValue="0"

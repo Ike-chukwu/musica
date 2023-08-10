@@ -14,6 +14,7 @@ const BottomDetail = (props) => {
   const [type, setType] = useState();
 
   let songRender;
+  let musicDetails
 
   useEffect(() => {
     if (props.data) {
@@ -36,30 +37,38 @@ const BottomDetail = (props) => {
     }
   }, [props.data]);
 
-  useEffect(() => {
-    if (isPlaying) {
-      audioElement.current.play(); // Play the audio when isPlaying becomes true
-    }
-  }, [isPlaying]);
-
-
+  // useEffect(() => {
+  //   if (isPlaying) {
+  //     console.log(currentSong);
+  //     audioElement.current.play(); // Play the audio when isPlaying becomes true
+  //   }
+  // }, [isPlaying]);
   
   
 
 
 
   const playSong = (img,trackName,artist,songLink) => {
-    console.log(isPlaying);
-    setisPlaying(true)
-    const musicDetails = {
+    musicDetails = {
       name:trackName,
       src:songLink,
       img:img,
       arTistName:artist
     }
     setCurrentSong(musicDetails)
-    // setIsPlaying(!isPlaying)
+    setisPlaying(true)
   }
+
+
+  
+
+
+
+
+
+
+
+
 
   if (tracks) {
     songRender = tracks.map((track) => {

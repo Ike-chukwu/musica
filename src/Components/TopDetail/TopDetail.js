@@ -51,6 +51,20 @@ const TopDetail = (props) => {
           </p>
           <p>{`${noOfTracks} songs ~ 16 hrs+`}</p>
         </div>
+        <div className="btn-pack">
+          <div className="btn">
+            <i className="fas fa-play"></i>
+            <span>Play all</span>
+          </div>
+          <div className="btn">
+            <i className="fas fa-box"></i>
+            <span>Add to collection</span>
+          </div>
+          <div className="btn">
+            <i className="fas fa-heart"></i>
+            <span>Like</span>
+          </div>
+        </div>
       </div>
     </div>
   );
