@@ -49,7 +49,7 @@ const TopDetail = (props) => {
           <p>
           {artistName}
           </p>
-          <p>{`${noOfTracks} songs ~ 16 hrs+`}</p>
+          <p>{`${noOfTracks} songs`}</p>
         </div>
         <div className="btn-pack">
           <div className="btn" onClick={() => props.playSong()}>

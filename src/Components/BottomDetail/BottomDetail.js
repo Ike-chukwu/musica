@@ -60,7 +60,16 @@ const BottomDetail = (props) => {
   }
 
 
-  
+  const durationCoverterToMinute = (time) => {
+    const conversionToSeconds = Math.floor( time / 1000)
+    const minutes = Math.floor(conversionToSeconds / 60)
+    const seconds =  conversionToSeconds % 60
+    console.log(`${minutes}:${seconds}`);
+    if (seconds < 10){
+      return `${minutes}:0${seconds}`
+    }
+    return `${minutes}:${seconds}`
+  }
 
 
 
@@ -90,12 +99,12 @@ const BottomDetail = (props) => {
             </p>
           </div>
           <p className="category">Single</p>
-          <p className="duration">{track.duration_ms}</p>
+          <p className="duration">{durationCoverterToMinute(track.duration_ms)}</p>
           <div className="options">
             <span className="options-btn">:</span>
             <div className="music-opt">
               <span className="options-btn-2">:</span>
-              <span className="time">{track.duration_ms}</span>
+              <span className="time">{durationCoverterToMinute(track.duration_ms)}</span>
             </div>
           </div>
         </div>
