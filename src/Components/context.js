@@ -39,7 +39,18 @@ export const AuthProvider = ({ children }) => {
 
   const [globalMusicData, setGlobalMusicData] = useState();
 
-  const [dataType, setDataType] = useState(null)
+
+  const [activeButton, setActiveButton] = useState("collection");
+  const [collection, setCollection] = useState([]);
+  const [fromCollection, setFromCollection] = useState(false);
+  const [clickedItemFromCollection, setClickedclickedItemFromCollection] =
+    useState();
+
+  const [likes, setlikes] = useState([]);
+  const [fromlikes, setFromLikes] = useState(false);
+  const [clickedItemFromLikes, setClickedclickedItemFromLikes] = useState();
+
+  const [dataType, setDataType] = useState(null);
   // ref of progress bar
   const musicRef = useRef();
   //ref of auio element
@@ -60,11 +71,10 @@ export const AuthProvider = ({ children }) => {
   //function that plays the next song
   const nextSong = () => {
     console.log(mData);
-    if(Array.isArray(mData) == false){
+    if (Array.isArray(mData) == false) {
       // console.log(mData);
       audioElement.current.currentTime = 0;
-    }
-    else{
+    } else {
       let index = mData.findIndex((music) => music.name == currentSong.name);
       if (index >= mData.length - 1) {
         index = 0;
@@ -74,17 +84,15 @@ export const AuthProvider = ({ children }) => {
         console.log(currentSong);
         setCurrentSong(mData[index]);
       }
-
     }
   };
 
   //function that plays the previous song
   const prevSong = () => {
-    if(Array.isArray(mData) == false){
+    if (Array.isArray(mData) == false) {
       audioElement.current.currentTime = 0;
-    }
-    else{
-      let index = mData.findIndex((music) => music.name == currentSong.name)
+    } else {
+      let index = mData.findIndex((music) => music.name == currentSong.name);
       if (index <= 0) {
         index = mData.length - 1;
         setCurrentSong(mData[index]);
@@ -95,7 +103,6 @@ export const AuthProvider = ({ children }) => {
       }
     }
     // console.log(dataType);
-
   };
 
   //function that repeats the previous song that was played
@@ -107,10 +114,9 @@ export const AuthProvider = ({ children }) => {
 
   //function that picks any rnadom song
   const shuffleSong = () => {
-    if(Array.isArray(mData) == false){
+    if (Array.isArray(mData) == false) {
       audioElement.current.currentTime = 0;
-    }
-    else{
+    } else {
       const randomNumber = Math.floor(Math.random() * mData.length);
       setCurrentSong(mData[randomNumber]);
     }
@@ -123,8 +129,6 @@ export const AuthProvider = ({ children }) => {
     });
     return () => unSubscribe();
   }, []);
-
-
 
   return (
     <AuthContext.Provider
@@ -155,8 +159,22 @@ export const AuthProvider = ({ children }) => {
         mData,
         globalMusicData,
         setGlobalMusicData,
-        dataType, setDataType,
+        dataType,
+        setDataType,
         setMdata,
+        collection,
+        setCollection,
+        fromCollection,
+        setFromCollection,
+        clickedItemFromCollection,
+        setClickedclickedItemFromCollection,
+        likes,
+        activeButton, setActiveButton,
+        setlikes,
+        fromlikes,
+        setFromLikes,
+        clickedItemFromLikes,
+        setClickedclickedItemFromLikes,
       }}
     >
       {children}

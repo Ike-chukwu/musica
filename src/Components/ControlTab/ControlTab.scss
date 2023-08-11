@@ -35,12 +35,13 @@ $range-progress: 0%;
   }
 
   .play-controls {
-    flex: 0.8;
+    // flex: 0.8;
     align-self: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 2rem;
+    width: 500px;
 
     input[type="range"] {
       -webkit-appearance: none;
@@ -119,7 +120,7 @@ $range-progress: 0%;
     padding: 2rem;
 
     .play-controls {
-      flex: 0.6;
+      width: 350px;
     }
   }
 }
@@ -128,6 +129,7 @@ $range-progress: 0%;
   .controls {
     .play-controls {
       flex: unset;
+      width: unset;
     }
   }
 }
@@ -136,7 +138,7 @@ $range-progress: 0%;
   .controls {
     .play-controls {
       flex: unset;
-
+      width: unset;
       .top {
         gap: 2rem;
       }

@@ -17,7 +17,11 @@ const SongDetails = () => {
     setisPlaying,
     isPlaying,
     audioElement,
-     currentSong,
+    currentSong,
+    fromCollection,
+    setFromCollection,
+    fromlikes,
+    setFromLikes,
   } = useContext(AuthContext);
   let objOfTracks;
 
@@ -27,65 +31,284 @@ const SongDetails = () => {
 
   useEffect(() => {
     if (globalMusicData) {
-      if (dataType == "album") {
-        itemInFocus = globalMusicData.find((item) => item.id == id);
-        const { total_tracks, name } = itemInFocus;
-        const artistName = itemInFocus.artists[0].name;
-        const albumImg = itemInFocus.images[0].url;
-        const tracks = itemInFocus.tracks.items;
-        objOfTracks = tracks.map((track) => {
-          return {
-            name: track.name,
-            src: track.preview_url,
+      if (fromCollection) {
+        if (dataType == "album") {
+          if (Array.isArray(globalMusicData) == false) {
+            itemInFocus = globalMusicData;
+            const { total_tracks, name } = itemInFocus;
+            const artistName = itemInFocus.artists[0].name;
+            const albumImg = itemInFocus.images[0].url;
+            const tracks = itemInFocus.tracks.items;
+            objOfTracks = tracks.map((track) => {
+              return {
+                name: track.name,
+                src: track.preview_url,
+                img: albumImg,
+                arTistName: artistName,
+              };
+            });
+            setMdata(objOfTracks);
+            console.log(mData);
+            // const musicDetails = {
+            //   name:trackName,
+            //   src:songLink,
+            //   img:img,
+            //   arTistName:artist
+            // }
+            setDataToBePassed({
+              tracks,
+              albumImg,
+              artistName,
+              name,
+              total_tracks,
+            });
+          } else {
+            itemInFocus = globalMusicData.find((item) => item.id == id);
+            const { total_tracks, name } = itemInFocus;
+            const artistName = itemInFocus.artists[0].name;
+            const albumImg = itemInFocus.images[0].url;
+            const tracks = itemInFocus.tracks.items;
+            objOfTracks = tracks.map((track) => {
+              return {
+                name: track.name,
+                src: track.preview_url,
+                img: albumImg,
+                arTistName: artistName,
+              };
+            });
+            setMdata(objOfTracks);
+            console.log(mData);
+            // const musicDetails = {
+            //   name:trackName,
+            //   src:songLink,
+            //   img:img,
+            //   arTistName:artist
+            // }
+            setDataToBePassed({
+              tracks,
+              albumImg,
+              artistName,
+              name,
+              total_tracks,
+            });
+          }
+        } else if (dataType == "track") {
+          if (Array.isArray(globalMusicData) == false) {
+            itemInFocus = globalMusicData;
+            const { preview_url, name, duration_ms } = itemInFocus;
+            const artistName = itemInFocus.album.artists[0].name;
+            const albumImg = itemInFocus.album.images[1].url;
+            // const tracks = itemInFocus.tracks.items;
+            objOfTracks = {
+              name,
+              src: preview_url,
+              img: albumImg,
+              arTistName: artistName,
+            };
+            setMdata(objOfTracks);
+            setDataToBePassed({
+              albumImg,
+              artistName,
+              name,
+              total_tracks: 1,
+              tracks: [{ duration_ms, name, preview_url }],
+            });
+          } else {
+            itemInFocus = globalMusicData.find((item) => item.id == id);
+            const { preview_url, name, duration_ms } = itemInFocus;
+            const artistName = itemInFocus.album.artists[0].name;
+            const albumImg = itemInFocus.album.images[1].url;
+            // const tracks = itemInFocus.tracks.items;
+            objOfTracks = {
+              name,
+              src: preview_url,
+              img: albumImg,
+              arTistName: artistName,
+            };
+            setMdata(objOfTracks);
+            setDataToBePassed({
+              albumImg,
+              artistName,
+              name,
+              total_tracks: 1,
+              tracks: [{ duration_ms, name, preview_url }],
+            });
+          }
+        }
+        setFromCollection(false);
+      } 
+      else if (fromlikes) {
+        if (dataType == "album") {
+          if (Array.isArray(globalMusicData) == false) {
+            itemInFocus = globalMusicData;
+            const { total_tracks, name } = itemInFocus;
+            const artistName = itemInFocus.artists[0].name;
+            const albumImg = itemInFocus.images[0].url;
+            const tracks = itemInFocus.tracks.items;
+            objOfTracks = tracks.map((track) => {
+              return {
+                name: track.name,
+                src: track.preview_url,
+                img: albumImg,
+                arTistName: artistName,
+              };
+            });
+            setMdata(objOfTracks);
+            console.log(mData);
+            // const musicDetails = {
+            //   name:trackName,
+            //   src:songLink,
+            //   img:img,
+            //   arTistName:artist
+            // }
+            setDataToBePassed({
+              tracks,
+              albumImg,
+              artistName,
+              name,
+              total_tracks,
+            });
+          } else {
+            itemInFocus = globalMusicData.find((item) => item.id == id);
+            const { total_tracks, name } = itemInFocus;
+            const artistName = itemInFocus.artists[0].name;
+            const albumImg = itemInFocus.images[0].url;
+            const tracks = itemInFocus.tracks.items;
+            objOfTracks = tracks.map((track) => {
+              return {
+                name: track.name,
+                src: track.preview_url,
+                img: albumImg,
+                arTistName: artistName,
+              };
+            });
+            setMdata(objOfTracks);
+            console.log(mData);
+            // const musicDetails = {
+            //   name:trackName,
+            //   src:songLink,
+            //   img:img,
+            //   arTistName:artist
+            // }
+            setDataToBePassed({
+              tracks,
+              albumImg,
+              artistName,
+              name,
+              total_tracks,
+            });
+          }
+        } else if (dataType == "track") {
+          if (Array.isArray(globalMusicData) == false) {
+            itemInFocus = globalMusicData;
+            const { preview_url, name, duration_ms } = itemInFocus;
+            const artistName = itemInFocus.album.artists[0].name;
+            const albumImg = itemInFocus.album.images[1].url;
+            // const tracks = itemInFocus.tracks.items;
+            objOfTracks = {
+              name,
+              src: preview_url,
+              img: albumImg,
+              arTistName: artistName,
+            };
+            setMdata(objOfTracks);
+            setDataToBePassed({
+              albumImg,
+              artistName,
+              name,
+              total_tracks: 1,
+              tracks: [{ duration_ms, name, preview_url }],
+            });
+          } else {
+            itemInFocus = globalMusicData.find((item) => item.id == id);
+            const { preview_url, name, duration_ms } = itemInFocus;
+            const artistName = itemInFocus.album.artists[0].name;
+            const albumImg = itemInFocus.album.images[1].url;
+            // const tracks = itemInFocus.tracks.items;
+            objOfTracks = {
+              name,
+              src: preview_url,
+              img: albumImg,
+              arTistName: artistName,
+            };
+            setMdata(objOfTracks);
+            setDataToBePassed({
+              albumImg,
+              artistName,
+              name,
+              total_tracks: 1,
+              tracks: [{ duration_ms, name, preview_url }],
+            });
+          }
+        }
+        setFromLikes(false);
+      }
+      
+      else {
+        if (dataType == "album") {
+          itemInFocus = globalMusicData.find((item) => item.id == id);
+          const { total_tracks, name } = itemInFocus;
+          const artistName = itemInFocus.artists[0].name;
+          const albumImg = itemInFocus.images[0].url;
+          const tracks = itemInFocus.tracks.items;
+          objOfTracks = tracks.map((track) => {
+            return {
+              name: track.name,
+              src: track.preview_url,
+              img: albumImg,
+              arTistName: artistName,
+            };
+          });
+          setMdata(objOfTracks);
+          console.log(mData);
+          // const musicDetails = {
+          //   name:trackName,
+          //   src:songLink,
+          //   img:img,
+          //   arTistName:artist
+          // }
+          setDataToBePassed({
+            tracks,
+            albumImg,
+            artistName,
+            name,
+            total_tracks,
+          });
+        } else if (dataType == "track") {
+          itemInFocus = globalMusicData.find((item) => item.id == id);
+          const { preview_url, name, duration_ms } = itemInFocus;
+          const artistName = itemInFocus.album.artists[0].name;
+          const albumImg = itemInFocus.album.images[1].url;
+          // const tracks = itemInFocus.tracks.items;
+          objOfTracks = {
+            name,
+            src: preview_url,
             img: albumImg,
             arTistName: artistName,
           };
-        });
-        setMdata(objOfTracks);
-        console.log(mData);
-        // const musicDetails = {
-        //   name:trackName,
-        //   src:songLink,
-        //   img:img,
-        //   arTistName:artist
-        // }
-        setDataToBePassed({ tracks, albumImg, artistName, name, total_tracks });
-      } else if (dataType == "track") {
-        itemInFocus = globalMusicData.find((item) => item.id == id);
-        const { preview_url, name, duration_ms } = itemInFocus;
-        const artistName = itemInFocus.album.artists[0].name;
-        const albumImg = itemInFocus.album.images[1].url;
-        // const tracks = itemInFocus.tracks.items;
-        objOfTracks = {
-          name,
-          src: preview_url,
-          img: albumImg,
-          arTistName: artistName,
-        };
-        setMdata(objOfTracks);
-        setDataToBePassed({
-          albumImg,
-          artistName,
-          name,
-          total_tracks: 1,
-          tracks: [{ duration_ms, name, preview_url }],
-        });
+          setMdata(objOfTracks);
+          setDataToBePassed({
+            albumImg,
+            artistName,
+            name,
+            total_tracks: 1,
+            tracks: [{ duration_ms, name, preview_url }],
+          });
+        }
       }
     }
   }, [globalMusicData]);
 
-
   const playSong = () => {
     if (Array.isArray(mData)) {
-      if(isPlaying){
-        audioElement.current.currentTime = 0
+      if (isPlaying) {
+        audioElement.current.currentTime = 0;
       }
       setCurrentSong(mData[0]);
     } else {
-      if(isPlaying){
-        audioElement.current.currentTime = 0
-      }
-      else{
+      if (isPlaying) {
+        audioElement.current.currentTime = 0;
+      } else {
         setCurrentSong(mData);
       }
     }

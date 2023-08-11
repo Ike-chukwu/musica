@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import "./BtnPack.scss";
+import { AuthContext } from "../context";
 
 const BtnPack = () => {
+  const {activeButton, setActiveButton} = useContext(AuthContext)
   const pages = ["collection", "likes"];
-  const [activeButton, setActiveButton] = useState("collection");
 
   return (
     <div className="btns">
