@@ -52,7 +52,7 @@ const TopDetail = (props) => {
           <p>{`${noOfTracks} songs ~ 16 hrs+`}</p>
         </div>
         <div className="btn-pack">
-          <div className="btn">
+          <div className="btn" onClick={() => props.playSong()}>
             <i className="fas fa-play"></i>
             <span>Play all</span>
           </div>

@@ -125,7 +125,7 @@ const TopCharts = () => {
       );
     });
   }
-
+  
   return (
     <div className="parent-Cont">
       <div className="top-charts">

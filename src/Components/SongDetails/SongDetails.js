@@ -13,7 +13,13 @@ const SongDetails = () => {
     setDataType,
     mData,
     setMdata,
+    setCurrentSong,
+    setisPlaying,
+    isPlaying,
+    audioElement,
+     currentSong,
   } = useContext(AuthContext);
+  let objOfTracks;
 
   const { id } = useParams();
   let itemInFocus;
@@ -27,7 +33,7 @@ const SongDetails = () => {
         const artistName = itemInFocus.artists[0].name;
         const albumImg = itemInFocus.images[0].url;
         const tracks = itemInFocus.tracks.items;
-        const objOfTracks = tracks.map((track) => {
+        objOfTracks = tracks.map((track) => {
           return {
             name: track.name,
             src: track.preview_url,
@@ -46,22 +52,45 @@ const SongDetails = () => {
         setDataToBePassed({ tracks, albumImg, artistName, name, total_tracks });
       } else if (dataType == "track") {
         itemInFocus = globalMusicData.find((item) => item.id == id);
-        const { preview_url, name,duration_ms } = itemInFocus;
+        const { preview_url, name, duration_ms } = itemInFocus;
         const artistName = itemInFocus.album.artists[0].name;
         const albumImg = itemInFocus.album.images[1].url;
         // const tracks = itemInFocus.tracks.items;
-        const objOfTracks = {
+        objOfTracks = {
           name,
           src: preview_url,
           img: albumImg,
           arTistName: artistName,
         };
         setMdata(objOfTracks);
-        setDataToBePassed({albumImg,artistName,name, total_tracks:1, tracks:[{duration_ms, name,preview_url}]})
+        setDataToBePassed({
+          albumImg,
+          artistName,
+          name,
+          total_tracks: 1,
+          tracks: [{ duration_ms, name, preview_url }],
+        });
       }
     }
   }, [globalMusicData]);
-  
+
+
+  const playSong = () => {
+    if (Array.isArray(mData)) {
+      if(isPlaying){
+        audioElement.current.currentTime = 0
+      }
+      setCurrentSong(mData[0]);
+    } else {
+      if(isPlaying){
+        audioElement.current.currentTime = 0
+      }
+      else{
+        setCurrentSong(mData);
+      }
+    }
+    setisPlaying(true);
+  };
 
   return (
     <div
@@ -75,7 +104,7 @@ const SongDetails = () => {
         }
       }
     >
-      <TopDetail id={id} data={dataToBePassed} />
+      <TopDetail id={id} data={dataToBePassed} playSong={playSong} />
       <BottomDetail id={id} data={dataToBePassed} dataType={dataType} />
     </div>
   );
