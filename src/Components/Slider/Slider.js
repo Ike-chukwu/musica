@@ -9,17 +9,18 @@ import "./Slider.css";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context";
 
+
 const Slider = (props) => {
+  //drag functionality and state management
   const [isDown, setIsDown] = useState(false);
   const [isDragging, setIsDragging] = useState(false); // Flag for drag action
   const [startX, setStartX] = useState(0);
   const [scrollLeftState, setScrollLeftState] = useState(null);
   const [mouseMoved, setMouseMoved] = useState(0);
-
   const itemsContainer = useRef();
   const navigate = useNavigate();
 
-  //drag functionality and state management
+  //function thet is triggered when mouse is clicked down
   const handleMouseDown = (e) => {
     e.preventDefault();
     setIsDown(true);
@@ -29,11 +30,11 @@ const Slider = (props) => {
     setMouseMoved(0);
   };
 
+  //function thet is triggered when cursor is moved
   const handleMouseMove = (e) => {
     if (!isDown) {
       return;
     }
-
     e.preventDefault();
     const currentMousePosition = e.pageX || e.touches[0].pageX;
     setMouseMoved(currentMousePosition - startX);
@@ -43,6 +44,7 @@ const Slider = (props) => {
     }
   };
 
+  //function thet is triggered when cursor is moved
   const handleMouseUp = () => {
     setIsDown(false);
     if (!isDragging) {
@@ -51,6 +53,7 @@ const Slider = (props) => {
     }
   };
 
+  //function that is triggered when link is clicked
   const handleLinkClick = (e, item) => {
     if (isDragging) {
       e.preventDefault();
@@ -64,8 +67,7 @@ const Slider = (props) => {
       itemsContainer.current.scrollLeft = scrollLeftState - mouseMoved;
     }
   }, [scrollLeftState, mouseMoved, isDown]);
-  
-  
+
   //fetching data
   const {
     globalMusicData,
@@ -75,7 +77,10 @@ const Slider = (props) => {
     mData,
     setMdata,
   } = useContext(AuthContext);
+
+  // state that manages playlist data gotten from spotify api
   const [playListData, setPlayListdata] = useState();
+
   const fetcher = async () => {
     const url = props.url;
     const options = {
@@ -91,7 +96,6 @@ const Slider = (props) => {
       const musicData = result.items;
       const trackData = musicData.map((item) => item.track);
       return trackData;
-      // setPlayListdata(trackData)
     } catch (error) {
       console.error(error);
     }
@@ -108,9 +112,9 @@ const Slider = (props) => {
     fetchDataMemoized();
   }, [fetchDataMemoized]);
 
-  let d;
+  let data;
   if (playListData) {
-    d = playListData.map((item) => {
+    data = playListData.map((item) => {
       return (
         <Link
           to={`/song/${item.id}`}
@@ -162,9 +166,9 @@ const Slider = (props) => {
       <h3>{props.category}</h3>
       <div
         ref={itemsContainer}
-        className={isDown ? "item-container actived" : "item-container"}
+        className={isDown ? "item-container activated" : "item-container"}
       >
-        {d}
+        {data}
       </div>
     </div>
   );

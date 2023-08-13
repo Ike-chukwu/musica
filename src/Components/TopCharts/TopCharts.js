@@ -11,12 +11,6 @@ import { AuthContext } from "../context";
 import { useNavigate } from "react-router-dom";
 
 const TopCharts = () => {
-  const [isDown, setIsDown] = useState(false);
-  const [startX, setStartX] = useState(0);
-  const [scrollLeftState, setScrollLeftState] = useState(null);
-  const [mouseMoved, setMouseMoved] = useState(0);
-  const [isDragging, setIsDragging] = useState(false); // Flag for drag action
-
   const [albums, setAlbums] = useState();
 
   const {
@@ -31,7 +25,13 @@ const TopCharts = () => {
   //drag functionality and state management
   const itemsContainer = useRef();
   const navigate = useNavigate();
+  const [isDown, setIsDown] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeftState, setScrollLeftState] = useState(null);
+  const [mouseMoved, setMouseMoved] = useState(0);
+  const [isDragging, setIsDragging] = useState(false); // Flag for drag action
 
+  //function thet is triggered when mouse is clicked down
   const handleMouseDown = (e) => {
     e.preventDefault();
     setIsDown(true);
@@ -41,11 +41,11 @@ const TopCharts = () => {
     setMouseMoved(0);
   };
 
+  //function thet is triggered when cursor is moved
   const handleMouseMove = (e) => {
     if (!isDown) {
       return;
     }
-
     e.preventDefault();
     const currentMousePosition = e.pageX || e.touches[0].pageX;
     setMouseMoved(currentMousePosition - startX);
@@ -55,6 +55,7 @@ const TopCharts = () => {
     }
   };
 
+  //function thet is triggered when cursor is moved
   const handleMouseUp = () => {
     setIsDown(false);
     if (!isDragging) {
@@ -63,6 +64,7 @@ const TopCharts = () => {
     }
   };
 
+  //function that is triggered when link is clicked
   const handleLinkClick = (e, id) => {
     if (isDragging) {
       e.preventDefault();
@@ -81,8 +83,8 @@ const TopCharts = () => {
     itemsContainer.current.scrollLeft = scrollLeftState - mouseMoved;
   }, [scrollLeftState, mouseMoved]);
 
-
-  //fetching data for charts
+  
+  //fetching data for charts from spotify albums endpoint
   let listOfAlbums;
   const fetchData = async () => {
     const url =
@@ -99,7 +101,6 @@ const TopCharts = () => {
       const response = await fetch(url, options);
       const result = await response.json();
       listOfAlbums = result.albums;
-      console.log(listOfAlbums);
       return listOfAlbums;
     } catch (error) {
       console.error(error);
@@ -120,7 +121,6 @@ const TopCharts = () => {
   let renderedData;
 
   if (albums) {
-    console.log(albums);
     renderedData = albums.map((album) => {
       const { name, type, release_date, id } = album;
       const artistName = album.artists[0].name;
@@ -153,6 +153,7 @@ const TopCharts = () => {
     });
   }
 
+  // render the horizontal slider when scren size is less than 970px
   if (window.innerWidth <= 970 && albums) {
     renderedData = albums.map((album) => {
       const { name, type, release_date, id } = album;
@@ -198,44 +199,7 @@ const TopCharts = () => {
     <div className="parent-Cont">
       <div className="top-charts">
         <h3>Top charts</h3>
-        <div className="cards">
-          {renderedData}
-          {/* <div className="card">
-            <div className="info">
-              <img src={img} alt="" />
-              <div className="text">
-                <h5 className="s-title">Golden age of 30s</h5>
-                <p className="a-name">Sean swadder</p>
-                <p className="duration">2:34:45</p>
-              </div>
-            </div>
-            <i className="fas fa-heart"></i>
-          </div>
-          <Link to="/song" style={{ textDecoration: "none", color: "white" }}>
-            <div className="card">
-              <div className="info">
-                <img src={img} alt="" />
-                <div className="text">
-                  <h5 className="s-title">Golden age of 30s</h5>
-                  <p className="a-name">Sean swadder</p>
-                  <p className="duration">2:34:45</p>
-                </div>
-              </div>
-              <i className="fas fa-heart"></i>
-            </div>
-          </Link>
-          <div className="card">
-            <div className="info">
-              <img src={img} alt="" />
-              <div className="text">
-                <h5 className="s-title">Golden age of 30s</h5>
-                <p className="a-name">Sean swadder</p>
-                <p className="duration">2:34:45</p>
-              </div>
-            </div>
-            <i className="fas fa-heart"></i>
-          </div> */}
-        </div>
+        <div className="cards">{renderedData}</div>
       </div>
 
       <div className="top-chart-slider">
@@ -244,51 +208,7 @@ const TopCharts = () => {
           ref={itemsContainer}
           className={isDown ? "item-container actived" : "item-container"}
         >
-        {renderedData}
-          {/* <div className="image">
-            <div className="info">
-              <div className="text">
-                <img src={img} alt="" />
-                <p className="s-title">Golden age of 30s</p>
-                <p className="a-name">Sean swadder</p>
-              </div>
-              <p className="duration">2:34:45</p>
-            </div>
-            <i className="fas fa-heart"></i>
-          </div>
-          <div className="image">
-            <div className="info">
-              <div className="text">
-                <img src={img} alt="" />
-                <p className="s-title">Golden age of 30s</p>
-                <p className="a-name">Sean swadder</p>
-              </div>
-              <p className="duration">2:34:45</p>
-            </div>
-            <i className="fas fa-heart"></i>
-          </div>
-          <div className="image">
-            <div className="info">
-              <div className="text">
-                <img src={img} alt="" />
-                <p className="s-title">Golden age of 30s</p>
-                <p className="a-name">Sean swadder</p>
-              </div>
-              <p className="duration">2:34:45</p>
-            </div>
-            <i className="fas fa-heart"></i>
-          </div>
-          <div className="image">
-            <div className="info">
-              <div className="text">
-                <img src={img} alt="" />
-                <p className="s-title">Golden age of 30s</p>
-                <p className="a-name">Sean swadder</p>
-              </div>
-              <p className="duration">2:34:45</p>
-            </div>
-            <i className="fas fa-heart"></i>
-          </div> */}
+          {renderedData}
         </div>
       </div>
     </div>

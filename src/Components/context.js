@@ -7,33 +7,24 @@ import {
 } from "firebase/auth";
 import { auth } from "../Firebase";
 import { useEffect } from "react";
-import ukelele from "../music/ukulele.mp3";
-import summer from "../music/summer.mp3";
-import hey from "../music/hey.mp3";
-import img1 from "../images/AlbumCard-1.jpg";
-import img2 from "../images/AlbumCard-2.jpg";
-import img3 from "../images/AlbumCard-3.jpg";
+
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
+  
   //state that stores sidenav status
   const [isSideNavActive, setSideNav] = useState(false);
+
   const [user, setUser] = useState({});
   const [username, setUsername] = useState("");
 
-  const [musicList, setMusic] = useState([
-    // { name: "ukelele", src: ukelele, img: img1 },
-    // { name: "summer", src: summer, img: img2 },
-    // { name: "hey", src: hey, img: img3 },
-  ]);
-
+  const [musicList, setMusic] = useState([]);
   const [currentSong, setCurrentSong] = useState();
   const [isPlaying, setisPlaying] = useState(false);
   const [isRepeatClicked, setIsRepeatClicked] = useState(false);
 
-  //different states for api calls
-  //for new releases section
+  //different states for api calls for new releases section
   const [title, setTitle] = useState();
   const [mData, setMdata] = useState();
 
@@ -41,10 +32,10 @@ export const AuthProvider = ({ children }) => {
 
 
   const [activeButton, setActiveButton] = useState("collection");
+  
   const [collection, setCollection] = useState([]);
   const [fromCollection, setFromCollection] = useState(false);
-  const [clickedItemFromCollection, setClickedclickedItemFromCollection] =
-    useState();
+  const [clickedItemFromCollection, setClickedclickedItemFromCollection] = useState();
 
   const [likes, setlikes] = useState([]);
   const [fromlikes, setFromLikes] = useState(false);
@@ -81,7 +72,6 @@ export const AuthProvider = ({ children }) => {
         setCurrentSong(mData[index]);
       } else {
         index++;
-        console.log(currentSong);
         setCurrentSong(mData[index]);
       }
     }
@@ -98,11 +88,9 @@ export const AuthProvider = ({ children }) => {
         setCurrentSong(mData[index]);
       } else {
         index--;
-        console.log(currentSong);
         setCurrentSong(mData[index]);
       }
     }
-    // console.log(dataType);
   };
 
   //function that repeats the previous song that was played

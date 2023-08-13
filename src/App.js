@@ -16,6 +16,7 @@ import { useEffect,useCallback, useState, useContext, useRef } from "react";
 import { AuthContext } from "./Components/context";
 
 function App() {
+
   const status = localStorage.getItem("status") || "";
   const loginState = localStorage.getItem("loggedIn") || false;
 
@@ -55,7 +56,8 @@ function App() {
   const [timeProgress, setTimeProgress] = useState(0);
   const [duration, setDuration] = useState(0);
 
-  // console.log(currentSong);
+
+
   return (
     <div className="App">
       {loggedIn && state == "signedIn" ? (

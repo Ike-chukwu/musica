@@ -1,8 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./TopDetail.scss";
-import img from "../../images/Lead-image.jpg";
 import { AuthContext } from "../context";
-import { useNavigate } from "react-router-dom";
+
 
 const TopDetail = (props) => {
   const {
@@ -10,15 +9,10 @@ const TopDetail = (props) => {
     dataType,
     collection,
     setCollection,
-    clickedItemFromCollection,
-    setClickedclickedItemFromCollection,
     likes,
     setlikes,
-    fromlikes,
-    setFromLikes,
-    clickedItemFromLikes,
-    setClickedclickedItemFromLikes,
   } = useContext(AuthContext);
+
   const [itemInFocus, setItemInFocus] = useState(null);
   const [noOfTracks, setNoOfTracks] = useState(0);
   const [artistName, setArtistName] = useState("");
@@ -27,61 +21,46 @@ const TopDetail = (props) => {
   const [isInCollection, setIsInCollection] = useState();
   const [isInLikes, setIsInLikes] = useState();
 
-  const navigate = useNavigate();
+  let foundItem;
 
   useEffect(() => {
     if (globalMusicData && dataType === "album") {
       if (Array.isArray(globalMusicData) == false) {
-        const foundItem = globalMusicData;
-        if (foundItem) {
-          setItemInFocus(foundItem);
-          setNoOfTracks(foundItem.total_tracks);
-          setArtistName(foundItem.artists[0].name);
-          setCover(foundItem.images[0].url);
-          setTracks(foundItem.tracks.items);
-        }
+        foundItem = globalMusicData;
       } else {
-        const foundItem = globalMusicData.find((item) => item.id == props.id);
-        if (foundItem) {
-          setItemInFocus(foundItem);
-          setNoOfTracks(foundItem.total_tracks);
-          setArtistName(foundItem.artists[0].name);
-          setCover(foundItem.images[0].url);
-          setTracks(foundItem.tracks.items);
-        }
+        foundItem = globalMusicData.find((item) => item.id == props.id);
+      }
+      if (foundItem) {
+        setItemInFocus(foundItem);
+        setNoOfTracks(foundItem.total_tracks);
+        setArtistName(foundItem.artists[0].name);
+        setCover(foundItem.images[0].url);
+        setTracks(foundItem.tracks.items);
       }
     } else if (globalMusicData && dataType === "track") {
       if (Array.isArray(globalMusicData) == false) {
-        const foundItem = globalMusicData;
-        if (foundItem) {
-          setItemInFocus(foundItem);
-          setNoOfTracks(1);
-          setArtistName(foundItem.album.artists[0].name);
-          setCover(foundItem.album.images[1].url);
-          // setTracks(foundItem.tracks.items);
-        }
+        foundItem = globalMusicData;
       } else {
-        const foundItem = globalMusicData.find((item) => item.id == props.id);
-        if (foundItem) {
-          setItemInFocus(foundItem);
-          setNoOfTracks(1);
-          setArtistName(foundItem.album.artists[0].name);
-          setCover(foundItem.album.images[1].url);
-          // setTracks(foundItem.tracks.items);
-        }
+        foundItem = globalMusicData.find((item) => item.id == props.id);
+      }
+      if (foundItem) {
+        setItemInFocus(foundItem);
+        setNoOfTracks(1);
+        setArtistName(foundItem.album.artists[0].name);
+        setCover(foundItem.album.images[1].url);
       }
     }
+
+    //state that stores the boolean returned if the music is present in collection array
     setIsInCollection(
       collection.find((item) => item.identification == props.id)
     );
-    setIsInLikes(
-      likes.find((item) => item.identification == props.id)
-    );
-    console.log(props.id);
-    console.log(collection);
+    
+    //state that stores the boolean returned if the music is present in likes array
+    setIsInLikes(likes.find((item) => item.identification == props.id));
   }, [globalMusicData, dataType, props.id]);
 
-  //add to collection
+  //add song to collection
   const addToCollection = (
     id,
     artistName,
@@ -102,7 +81,7 @@ const TopDetail = (props) => {
     setIsInCollection(true);
   };
 
-  //add to collection
+  //remove song from collection
   const removeFromCollection = () => {
     const filteredCollection = collection.filter(
       (item) => item.identification !== props.id
@@ -111,7 +90,7 @@ const TopDetail = (props) => {
     setCollection(filteredCollection);
   };
 
-  //add to likes
+  //add song to likes
   const addToLikes = (id, artistName, img, songName, dataType, itemInFocus) => {
     const likedItemDetails = {
       identification: id,
@@ -125,7 +104,7 @@ const TopDetail = (props) => {
     setIsInLikes(true);
   };
 
-  //remove from likes
+  //remove song from likes
   const removeFromLikes = () => {
     const filteredLikes = likes.filter(
       (item) => item.identification !== props.id
@@ -181,7 +160,9 @@ const TopDetail = (props) => {
               <span>Like</span>
             </div>
           ) : (
-            <div className="btn"  onClick={() =>
+            <div
+              className="btn"
+              onClick={() =>
                 addToLikes(
                   props.id,
                   artistName,
@@ -190,8 +171,9 @@ const TopDetail = (props) => {
                   dataType,
                   itemInFocus
                 )
-              }>
-              <i className="fas fa-heart" style={{color:'white'}}></i>
+              }
+            >
+              <i className="fas fa-heart" style={{ color: "white" }}></i>
               <span>Like</span>
             </div>
           )}

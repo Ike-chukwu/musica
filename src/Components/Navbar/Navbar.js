@@ -26,7 +26,3 @@ const Navbar = () => {
 
 export default Navbar;
 
-// https://t.co/a8VPTUm7d3
-//shazam
-//spotify
-//deezer
