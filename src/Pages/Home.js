@@ -12,7 +12,6 @@ const Home = () => {
   const secondUrl = "https://spotify81.p.rapidapi.com/playlist_tracks?id=37i9dQZF1DWUHcUDX0za7N&offset=0&limit=100"
   
   
-  const { title, mData } = useContext(AuthContext);
   return (
     <div className="home">
       <Latest />

@@ -172,13 +172,16 @@ const SongDetails = () => {
   }, [globalMusicData]);
 
   //function attached to play all button in top part of song details page
-  const playSong = () => {
+  const playAllButtonHandler = () => {
+    //checks if the current song is from an album
     if (Array.isArray(mData)) {
       if (isPlaying) {
         audioElement.current.currentTime = 0;
       }
       setCurrentSong(mData[0]);
-    } else {
+    }
+    //checks if the current song is just a single track
+    else {
       if (isPlaying) {
         audioElement.current.currentTime = 0;
       } else {
@@ -190,7 +193,7 @@ const SongDetails = () => {
 
   return (
     <div className="songDetails">
-      <TopDetail id={id} data={dataToBePassed} playSong={playSong} />
+      <TopDetail id={id} playSong={playAllButtonHandler} />
       <BottomDetail id={id} data={dataToBePassed} dataType={dataType} />
     </div>
   );

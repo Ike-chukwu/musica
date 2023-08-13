@@ -15,10 +15,10 @@ const Latest = () => {
         <div className="left">
           <span className="title">Currated Playlist</span>
           <div className="middle">
-            <h3>R & B Hits</h3>
+            <h3>Afro-Beats!</h3>
             <span>
-              All mine, Lie again, Petty call me everyday, Out of time, No love,
-              Bad habit, and so much more
+              Soso, Lonely at the top, Abracadabra,Everyday, Out of time, No love,
+              Dog Eat Dog,Declan Rice and so much more.
             </span>
           </div>
           <div className="imgs-likes">

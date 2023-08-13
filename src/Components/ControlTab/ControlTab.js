@@ -6,14 +6,10 @@ import React, {
   useEffect,
 } from "react";
 import "./ControlTab.scss";
-import imageTry from "../../images/Rectangle 14.jpg";
 import { AuthContext } from "../context";
 
 const ControlTab = (props) => {
   const {
-    musicList,
-    setCurrentSong,
-    setMusic,
     nextSong,
     currentSong,
     isPlaying,

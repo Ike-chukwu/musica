@@ -12,51 +12,27 @@ import Radio from "../src/Pages/Radio";
 import SideNav from "./Components/SideNav/SideNav";
 import ControlTab from "./Components/ControlTab/ControlTab";
 import SongDetails from "./Components/SongDetails/SongDetails";
-import { useEffect,useCallback, useState, useContext, useRef } from "react";
+import { useEffect, useCallback, useState, useContext, useRef } from "react";
 import { AuthContext } from "./Components/context";
 
 function App() {
-
   const status = localStorage.getItem("status") || "";
   const loginState = localStorage.getItem("loggedIn") || false;
 
   const [loggedIn, setLogin] = useState(loginState);
   const [state, setStaate] = useState(status);
 
-  const {
-    musicList,
-    setCurrentSong,
-    setMusic,
-    currentSong,
-    isPlaying,
-    setisPlaying,
-    musicRef,
-    nextSong,
-    audioElement,
-    isRepeatClicked
-  } = useContext(AuthContext);
-
-
-  
-
-  
+  const { currentSong, musicRef, nextSong, audioElement, isRepeatClicked } =
+    useContext(AuthContext);
 
   const onLoadedMetadata = () => {
     const seconds = audioElement.current.duration;
     setDuration(seconds);
     musicRef.current.max = seconds;
-
   };
-
-
-
-
- 
 
   const [timeProgress, setTimeProgress] = useState(0);
   const [duration, setDuration] = useState(0);
-
-
 
   return (
     <div className="App">
@@ -76,15 +52,29 @@ function App() {
                 element={<Profile setLog={setLogin} loggedIn={loggedIn} />}
               />{" "}
             </Routes>
-            {
-              isRepeatClicked ?
-            <audio  onLoadedMetadata={onLoadedMetadata} src={currentSong?currentSong.src :null} ref={audioElement} onEnded={nextSong} loop></audio> :
-            <audio  onLoadedMetadata={onLoadedMetadata} src={currentSong?currentSong.src :null} ref={audioElement} onEnded={nextSong}></audio>
-            }
-            {
-              currentSong &&
-            <ControlTab duration={duration} setTimeProgress={setTimeProgress} audioElement={audioElement}/>
-            }
+            {isRepeatClicked ? (
+              <audio
+                onLoadedMetadata={onLoadedMetadata}
+                src={currentSong ? currentSong.src : null}
+                ref={audioElement}
+                onEnded={nextSong}
+                loop
+              ></audio>
+            ) : (
+              <audio
+                onLoadedMetadata={onLoadedMetadata}
+                src={currentSong ? currentSong.src : null}
+                ref={audioElement}
+                onEnded={nextSong}
+              ></audio>
+            )}
+            {currentSong && (
+              <ControlTab
+                duration={duration}
+                setTimeProgress={setTimeProgress}
+                audioElement={audioElement}
+              />
+            )}
           </div>
         </>
       ) : (

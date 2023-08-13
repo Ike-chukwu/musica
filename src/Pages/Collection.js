@@ -7,21 +7,24 @@ import { AuthContext } from "../Components/context";
 const Collection = () => {
   const {
     globalMusicData,
-    dataType,
     collection,
     setCollection,
     setGlobalMusicData,
-    setDataType,
     likes,
-     setlikes
+    setlikes,
   } = useContext(AuthContext);
-
-
 
   return (
     <div className="collection">
       <BtnPack />
-      <MCollection collection={collection} setCollection={setCollection} globalMusicData={globalMusicData} setGlobalMusicData={setGlobalMusicData} likes={likes} setlikes={setlikes} />
+      <MCollection
+        collection={collection}
+        setCollection={setCollection}
+        globalMusicData={globalMusicData}
+        setGlobalMusicData={setGlobalMusicData}
+        likes={likes}
+        setlikes={setlikes}
+      />
     </div>
   );
 };
