@@ -1,0 +1,135 @@
+[debug] [2023-08-15T18:22:53.762Z] ----------------------------------------------------------------------
+[debug] [2023-08-15T18:22:53.766Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\IK\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init hosting
+[debug] [2023-08-15T18:22:53.767Z] CLI Version:   12.4.7
+[debug] [2023-08-15T18:22:53.768Z] Platform:      win32
+[debug] [2023-08-15T18:22:53.769Z] Node Version:  v18.14.0
+[debug] [2023-08-15T18:22:53.770Z] Time:          Tue Aug 15 2023 19:22:53 GMT+0100 (West Africa Standard Time)
+[debug] [2023-08-15T18:22:53.771Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-08-15T18:22:53.883Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-08-15T18:22:53.883Z] > authorizing via signed-in user (iykeugboko9@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\IK\Desktop\web development\frontendmentor.io challenges\musica\my-app
+
+Before we get started, keep in mind:
+
+  * You are initializing within an existing Firebase project directory
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2023-08-15T18:23:01.232Z] Using project from CLI flag: musica-42325
+[debug] [2023-08-15T18:23:01.234Z] > refreshing access token with scopes: []
+[debug] [2023-08-15T18:23:01.238Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2023-08-15T18:23:01.238Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2023-08-15T18:23:02.056Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2023-08-15T18:23:02.056Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2023-08-15T18:23:02.084Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/musica-42325 [none]
+[debug] [2023-08-15T18:23:02.830Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/musica-42325 200
+[debug] [2023-08-15T18:23:02.830Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/musica-42325 {"projectId":"musica-42325","projectNumber":"575899538957","displayName":"musica","name":"projects/musica-42325","resources":{"hostingSite":"musica-42325"},"state":"ACTIVE","etag":"1_6d0f8fbf-4329-4f45-95ab-c92c235149e4"}
+[info] i  Using project musica-42325 (musica) 
+[info] 
+=== Hosting Setup
+[info] 
+[info] Your public directory is the folder (relative to your project directory) that
+[info] will contain Hosting assets to be uploaded with firebase deploy. If you
+[info] have a build process for your assets, use your build's output directory.
+[info] 
+[debug] [2023-08-15T18:23:12.073Z] >>> [apiv2][query] GET https://www.gstatic.com/firebasejs/releases.json [none]
+[debug] [2023-08-15T18:23:14.810Z] <<< [apiv2][status] GET https://www.gstatic.com/firebasejs/releases.json 200
+[debug] [2023-08-15T18:23:14.810Z] <<< [apiv2][body] GET https://www.gstatic.com/firebasejs/releases.json {"current":{"version":"10.1.0","browserURL":"https://www.gstatic.com/firebasejs/10.1.0/firebase.js","packageURL":"https://www.gstatic.com/firebasejs/10.1.0/firebase.tgz"},"live":{"version":"10.1","browserURL":"https://www.gstatic.com/firebasejs/live/10.1/firebase.js","packageURL":"https://www.gstatic.com/firebasejs/live/10.1/firebase.tgz"},"components":{"analytics":"https://www.gstatic.com/firebasejs/10.1.0/firebase-analytics.js","app":"https://www.gstatic.com/firebasejs/10.1.0/firebase-app.js","app-check":"https://www.gstatic.com/firebasejs/10.1.0/firebase-app-check.js","auth":"https://www.gstatic.com/firebasejs/10.1.0/firebase-auth.js","auth/cordova":"https://www.gstatic.com/firebasejs/10.1.0/firebase-auth/cordova.js","functions":"https://www.gstatic.com/firebasejs/10.1.0/firebase-functions.js","firestore":"https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore.js","firestore/lite":"https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore/lite.js","installations":"https://www.gstatic.com/firebasejs/10.1.0/firebase-installations.js","storage":"https://www.gstatic.com/firebasejs/10.1.0/firebase-storage.js","performance":"https://www.gstatic.com/firebasejs/10.1.0/firebase-performance.js","remote-config":"https://www.gstatic.com/firebasejs/10.1.0/firebase-remote-config.js","messaging":"https://www.gstatic.com/firebasejs/10.1.0/firebase-messaging.js","messaging/sw":"https://www.gstatic.com/firebasejs/10.1.0/firebase-messaging/sw.js","database":"https://www.gstatic.com/firebasejs/10.1.0/firebase-database.js","firestore.memory":"https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore.memory.js"}}
+[info] +  Wrote build/index.html 
+[info] 
+[info] i  Writing configuration info to firebase.json... 
+[info] i  Writing project information to .firebaserc... 
+[info] 
+[info] +  Firebase initialization complete! 
+[debug] [2023-08-15T18:23:25.200Z] Error: Timed out.
+    at Timeout.<anonymous> (C:\Users\IK\AppData\Roaming\npm\node_modules\firebase-tools\lib\utils.js:254:49)
+    at listOnTimeout (node:internal/timers:569:17)
+    at process.processTimers (node:internal/timers:512:7)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-08-15T18:23:38.257Z] ----------------------------------------------------------------------
+[debug] [2023-08-15T18:23:38.262Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\IK\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2023-08-15T18:23:38.263Z] CLI Version:   12.4.7
+[debug] [2023-08-15T18:23:38.263Z] Platform:      win32
+[debug] [2023-08-15T18:23:38.264Z] Node Version:  v18.14.0
+[debug] [2023-08-15T18:23:38.266Z] Time:          Tue Aug 15 2023 19:23:38 GMT+0100 (West Africa Standard Time)
+[debug] [2023-08-15T18:23:38.266Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-08-15T18:23:38.406Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-08-15T18:23:38.406Z] > authorizing via signed-in user (iykeugboko9@gmail.com)
+[debug] [2023-08-15T18:23:38.407Z] [iam] checking project musica-42325 for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2023-08-15T18:23:38.410Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/musica-42325:testIamPermissions [none]
+[debug] [2023-08-15T18:23:38.410Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/musica-42325:testIamPermissions x-goog-quota-user=projects/musica-42325
+[debug] [2023-08-15T18:23:38.410Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/musica-42325:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2023-08-15T18:23:39.649Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/musica-42325:testIamPermissions 200
+[debug] [2023-08-15T18:23:39.651Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/musica-42325:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2023-08-15T18:23:39.654Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/musica-42325 [none]
+[debug] [2023-08-15T18:23:40.415Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/musica-42325 200
+[debug] [2023-08-15T18:23:40.415Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/musica-42325 {"projectId":"musica-42325","projectNumber":"575899538957","displayName":"musica","name":"projects/musica-42325","resources":{"hostingSite":"musica-42325"},"state":"ACTIVE","etag":"1_6d0f8fbf-4329-4f45-95ab-c92c235149e4"}
+[info] 
+[info] === Deploying to 'musica-42325'...
+[info] 
+[info] i  deploying hosting 
+[debug] [2023-08-15T18:23:40.439Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/musica-42325/versions [none]
+[debug] [2023-08-15T18:23:40.440Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/musica-42325/versions {"status":"CREATED","labels":{"deployment-tool":"cli-firebase"}}
+[debug] [2023-08-15T18:23:41.957Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/musica-42325/versions 200
+[debug] [2023-08-15T18:23:41.958Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/musica-42325/versions {"name":"projects/575899538957/sites/musica-42325/versions/72ac47e84cbfd373","status":"CREATED","config":{},"labels":{"deployment-tool":"cli-firebase"}}
+[info] i  hosting[musica-42325]: beginning deploy... 
+[info] i  hosting[musica-42325]: found 7 files in build 
+[debug] [2023-08-15T18:23:41.988Z] [hosting] uploading with 200 concurrency
+[debug] [2023-08-15T18:23:42.016Z] [hosting] hash cache [YnVpbGQ] stored for 7 files
+[debug] [2023-08-15T18:23:42.017Z] [hosting][hash queue][FINAL] {"max":15,"min":1,"avg":3,"active":0,"complete":7,"success":7,"errored":0,"retried":0,"total":7,"elapsed":22}
+[debug] [2023-08-15T18:23:42.019Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/575899538957/sites/musica-42325/versions/72ac47e84cbfd373:populateFiles [none]
+[debug] [2023-08-15T18:23:42.019Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/575899538957/sites/musica-42325/versions/72ac47e84cbfd373:populateFiles {"files":{"/favicon.ico":"eae62e993eb980ec8a25058c39d5a51feab118bd2100c4deebb2a9c158ec11f9","/logo192.png":"3ee59515172ee198f3be375979df15ac5345183e656720a381b8872b2a39dc8b","/logo512.png":"ee7e2f3fdb8209c4b6fd7bef6ba50d1b9dba30a25bb5c3126df057e1cb6f5331","/manifest.json":"aff3449bdc238776f5d6d967f19ec491b36aed5fb7f23ccff6500736fd58494a","/robots.txt":"bfe106a3fb878dc83461c86818bf74fc1bdc7f28538ba613cd3e775516ce8b49","/build/index.html":"00519993ca464cfad4694ffd7b8572508be384d9a496f10deeda88729303b2b2","/index.html":"00519993ca464cfad4694ffd7b8572508be384d9a496f10deeda88729303b2b2"}}
+[debug] [2023-08-15T18:23:43.281Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/575899538957/sites/musica-42325/versions/72ac47e84cbfd373:populateFiles 200
+[debug] [2023-08-15T18:23:43.281Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/575899538957/sites/musica-42325/versions/72ac47e84cbfd373:populateFiles {"uploadUrl":"https://upload-firebasehosting.googleapis.com/upload/sites/musica-42325/versions/72ac47e84cbfd373/files"}
+[debug] [2023-08-15T18:23:43.282Z] [hosting][populate queue][FINAL] {"max":1270,"min":1270,"avg":1270,"active":0,"complete":1,"success":1,"errored":0,"retried":0,"total":1,"elapsed":1270}
+[debug] [2023-08-15T18:23:43.283Z] [hosting] uploads queued: 0
+[debug] [2023-08-15T18:23:43.283Z] [hosting][upload queue][FINAL] {"max":0,"min":9999999999,"avg":0,"active":0,"complete":0,"success":0,"errored":0,"retried":0,"total":0,"elapsed":1692123823283}
+[info] +  hosting[musica-42325]: file upload complete 
+[debug] [2023-08-15T18:23:43.288Z] [hosting] deploy completed after 1324ms
+[debug] [2023-08-15T18:23:43.289Z] [
+  {
+    "config": {
+      "public": "build",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ],
+      "site": "musica-42325"
+    },
+    "version": "projects/575899538957/sites/musica-42325/versions/72ac47e84cbfd373"
+  }
+]
+[info] i  hosting[musica-42325]: finalizing version... 
+[debug] [2023-08-15T18:23:43.305Z] >>> [apiv2][query] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/musica-42325/versions/72ac47e84cbfd373 updateMask=status%2Cconfig
+[debug] [2023-08-15T18:23:43.305Z] >>> [apiv2][body] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/musica-42325/versions/72ac47e84cbfd373 {"status":"FINALIZED","config":{"rewrites":[{"glob":"**","path":"/index.html"}]}}
+[debug] [2023-08-15T18:23:44.536Z] <<< [apiv2][status] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/musica-42325/versions/72ac47e84cbfd373 200
+[debug] [2023-08-15T18:23:44.536Z] <<< [apiv2][body] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/musica-42325/versions/72ac47e84cbfd373 {"name":"projects/575899538957/sites/musica-42325/versions/72ac47e84cbfd373","status":"FINALIZED","config":{"rewrites":[{"glob":"**","path":"/index.html"}]},"labels":{"deployment-tool":"cli-firebase"},"createTime":"2023-08-15T18:24:18.911621Z","createUser":{"email":"iykeugboko9@gmail.com"},"finalizeTime":"2023-08-15T18:24:21.787745Z","finalizeUser":{"email":"iykeugboko9@gmail.com"}}
+[debug] [2023-08-15T18:23:44.536Z] [hosting] finalized version for musica-42325:[object Object]
+[info] +  hosting[musica-42325]: version finalized 
+[info] i  hosting[musica-42325]: releasing new version... 
+[debug] [2023-08-15T18:23:44.541Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/musica-42325/channels/live/releases versionName=projects%2F575899538957%2Fsites%2Fmusica-42325%2Fversions%2F72ac47e84cbfd373
+[debug] [2023-08-15T18:23:44.541Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/musica-42325/channels/live/releases {}

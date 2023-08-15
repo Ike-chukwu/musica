@@ -8,11 +8,11 @@ import {
 import { auth } from "../Firebase";
 import { useEffect } from "react";
 
-
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  
+  const [loading, setLoading] = useState(false);
+
   //state that stores sidenav status
   const [isSideNavActive, setSideNav] = useState(false);
 
@@ -30,12 +30,12 @@ export const AuthProvider = ({ children }) => {
 
   const [globalMusicData, setGlobalMusicData] = useState();
 
-
   const [activeButton, setActiveButton] = useState("collection");
-  
+
   const [collection, setCollection] = useState([]);
   const [fromCollection, setFromCollection] = useState(false);
-  const [clickedItemFromCollection, setClickedclickedItemFromCollection] = useState();
+  const [clickedItemFromCollection, setClickedclickedItemFromCollection] =
+    useState();
 
   const [likes, setlikes] = useState([]);
   const [fromlikes, setFromLikes] = useState(false);
@@ -157,12 +157,15 @@ export const AuthProvider = ({ children }) => {
         clickedItemFromCollection,
         setClickedclickedItemFromCollection,
         likes,
-        activeButton, setActiveButton,
+        activeButton,
+        setActiveButton,
         setlikes,
         fromlikes,
         setFromLikes,
         clickedItemFromLikes,
         setClickedclickedItemFromLikes,
+        loading,
+        setLoading,
       }}
     >
       {children}
