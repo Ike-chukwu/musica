@@ -1,8 +1,8 @@
 import React, { useEffect, useContext } from "react";
 import "./MCollection.scss";
-import img from "../../images/AlbumCard-3.jpg";
 import { AuthContext } from "../context";
 import { useNavigate } from "react-router-dom";
+import img from "../../images/carton.png";
 
 const MCollection = (props) => {
   const navigate = useNavigate();
@@ -24,7 +24,7 @@ const MCollection = (props) => {
       setDataType(type);
       navigate(`/song/${id}`);
     };
-    if (props.collection) {
+    if (props.collection.length > 0) {
       collectionData = props.collection.map((music) => {
         return (
           <div
@@ -49,6 +49,13 @@ const MCollection = (props) => {
           </div>
         );
       });
+    } else {
+      collectionData = (
+        <div className="empty-state">
+          <img src={img} alt="" />
+          Your collection is empty!
+        </div>
+      );
     }
   } else if (activeButton == "likes") {
     const renderDataInSongDetail = (id, itemInFocus, type) => {
@@ -58,7 +65,7 @@ const MCollection = (props) => {
       navigate(`/song/${id}`);
     };
 
-    if (props.likes) {
+    if (props.likes.length > 0) {
       collectionData = props.likes.map((music) => {
         return (
           <div
@@ -83,6 +90,13 @@ const MCollection = (props) => {
           </div>
         );
       });
+    } else {
+      collectionData = (
+        <div className="empty-state">
+          <img src={img} alt="" />
+          Your have no likes!
+        </div>
+      );
     }
   }
 

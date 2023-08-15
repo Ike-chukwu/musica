@@ -83,18 +83,16 @@ const TopCharts = () => {
     itemsContainer.current.scrollLeft = scrollLeftState - mouseMoved;
   }, [scrollLeftState, mouseMoved]);
 
-  
   //fetching data for charts from spotify albums endpoint
   let listOfAlbums;
   const fetchData = async () => {
-    const url =
-      "https://spotify81.p.rapidapi.com/albums?ids=2O9VJaLSnwjZ2HPpMaVoPU%2C73rKiFhHZatrwJL0B1F6hY%2C7bFrLfofeujIbvs4WcHn3p";
+    const url = 'https://spotify81.p.rapidapi.com/albums?ids=2O9VJaLSnwjZ2HPpMaVoPU%252C73rKiFhHZatrwJL0B1F6hY%252C7bFrLfofeujIbvs4WcHn3p';
     const options = {
-      method: "GET",
+      method: 'GET',
       headers: {
-        "X-RapidAPI-Key": "83d16f10efmsh798c2687b6a1e69p1861cejsnb955344b3b13",
-        "X-RapidAPI-Host": "spotify81.p.rapidapi.com",
-      },
+        'X-RapidAPI-Key': '59e49d7a62mshd0ad2ae881b7debp1b303ajsnf487f30d0e69',
+        'X-RapidAPI-Host': 'spotify81.p.rapidapi.com'
+      }
     };
 
     try {
@@ -106,6 +104,9 @@ const TopCharts = () => {
       console.error(error);
     }
   };
+
+  
+
 
   //get data
   const fetchDataMemoized = useCallback(() => {

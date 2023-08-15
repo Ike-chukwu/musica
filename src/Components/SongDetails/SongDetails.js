@@ -4,6 +4,7 @@ import TopDetail from "../TopDetail/TopDetail";
 import BottomDetail from "../BottomDetail/BottomDetail";
 import { useParams } from "react-router-dom";
 import { AuthContext } from "../context";
+import OpacityAnimation from "../OpacityAnimation/OpacityAnimation";
 
 const SongDetails = () => {
   const {
@@ -192,10 +193,12 @@ const SongDetails = () => {
   };
 
   return (
-    <div className="songDetails">
-      <TopDetail id={id} playSong={playAllButtonHandler} />
-      <BottomDetail id={id} data={dataToBePassed} dataType={dataType} />
-    </div>
+    <OpacityAnimation>
+      <div className="songDetails">
+        <TopDetail id={id} playSong={playAllButtonHandler} />
+        <BottomDetail id={id} data={dataToBePassed} dataType={dataType} />
+      </div>
+    </OpacityAnimation>
   );
 };
 

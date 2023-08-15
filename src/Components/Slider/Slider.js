@@ -86,8 +86,8 @@ const Slider = (props) => {
     const options = {
       method: "GET",
       headers: {
-        "X-RapidAPI-Key": "83d16f10efmsh798c2687b6a1e69p1861cejsnb955344b3b13",
-        "X-RapidAPI-Host": "spotify81.p.rapidapi.com",
+        'X-RapidAPI-Key': '59e49d7a62mshd0ad2ae881b7debp1b303ajsnf487f30d0e69',
+        'X-RapidAPI-Host': 'spotify81.p.rapidapi.com'
       },
     };
     try {

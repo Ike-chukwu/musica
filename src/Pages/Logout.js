@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import OpacityAnimation from "../Components/OpacityAnimation/OpacityAnimation";
 
 const Logout = () => {
   return (
-    <div>Logout</div>
-  )
-}
+    <OpacityAnimation>
+      <div>Logout</div>
+    </OpacityAnimation>
+  );
+};
 
-export default Logout
+export default Logout;

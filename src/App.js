@@ -12,8 +12,11 @@ import Radio from "../src/Pages/Radio";
 import SideNav from "./Components/SideNav/SideNav";
 import ControlTab from "./Components/ControlTab/ControlTab";
 import SongDetails from "./Components/SongDetails/SongDetails";
-import { useEffect, useCallback, useState, useContext, useRef } from "react";
+import { useState, useContext } from "react";
 import { AuthContext } from "./Components/context";
+import UnderConstruction from "./Components/UnderConstructionPage/UnderConstruction";
+import { AnimatePresence } from "framer-motion";
+import { useLocation } from "react-router-dom";
 
 function App() {
   const status = localStorage.getItem("status") || "";
@@ -34,6 +37,8 @@ function App() {
   const [timeProgress, setTimeProgress] = useState(0);
   const [duration, setDuration] = useState(0);
 
+  const location = useLocation();
+
   return (
     <div className="App">
       {loggedIn && state == "signedIn" ? (
@@ -42,16 +47,20 @@ function App() {
           <SideNav />
           <div className="ex">
             <Sidebar />
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/song/:id" element={<SongDetails />} />
-              <Route path="/collection" element={<Collection />} />
-              <Route path="/logout" element={<Logout />} />
-              <Route
-                path="/profile"
-                element={<Profile setLog={setLogin} loggedIn={loggedIn} />}
-              />{" "}
-            </Routes>
+            <AnimatePresence mode="wait">
+              <Routes key={location.pathname} location={location}>
+                <Route path="/" element={<Home />} />
+                <Route path="/song/:id" element={<SongDetails />} />
+                <Route path="/collection" element={<Collection />} />
+                <Route path="/logout" element={<Logout />} />
+                <Route path="/radio" element={<UnderConstruction />} />
+                <Route path="/video" element={<UnderConstruction />} />
+                <Route
+                  path="/profile"
+                  element={<Profile setLog={setLogin} loggedIn={loggedIn} />}
+                />
+              </Routes>
+            </AnimatePresence>
             {isRepeatClicked ? (
               <audio
                 onLoadedMetadata={onLoadedMetadata}
@@ -78,14 +87,16 @@ function App() {
           </div>
         </>
       ) : (
-        <Routes>
-          <Route path="/" element={<Signin setLog={setLogin} />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route
-            path="/profile"
-            element={<Profile setLog={setLogin} loggedIn={loggedIn} />}
-          />
-        </Routes>
+        <AnimatePresence mode="wait">
+          <Routes key={location.pathname} location={location}>
+            <Route path="/" element={<Signin setLog={setLogin} />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route
+              path="/profile"
+              element={<Profile setLog={setLogin} loggedIn={loggedIn} />}
+            />
+          </Routes>
+        </AnimatePresence>
       )}
     </div>
   );

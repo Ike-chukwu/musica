@@ -1,0 +1,31 @@
+.images {
+  width: 100%;
+  margin-top: 7rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2rem;
+  img {
+    width: 400px;
+    margin-inline: auto;
+  }
+  .text-pack {
+    text-align: center;
+  }
+  .error-message {
+    color: #ecce66;
+    font-size: 2.4rem;
+  }
+}
+
+
+@media (max-width:970px){
+    .image {
+        
+        img {
+            width: 300px;
+            text-align: center;
+            margin-inline: auto;
+          }
+    }
+  }

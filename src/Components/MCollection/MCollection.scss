@@ -1,10 +1,29 @@
 .m-collection {
   //   display: flex;
+  
   display: grid;
   grid-gap: 4.5rem;
   width: 100%;
   margin-top: 5rem;
   grid-template-columns: repeat(auto-fill, minmax(250px, 300px));
+
+  .empty-state{
+    display: flex;
+    flex-direction: column;
+    color: #ecce66;
+    font-size: 2.4rem;
+    text-align: center;  
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+
+    img{
+      width: 500px;
+      text-align: center;
+      margin-inline: auto;
+    }
+  }
+
 
   .picked {
     // width: 300px;
@@ -87,6 +106,7 @@
   .m-collection {
     padding-inline: 2rem;
     grid-template-columns: repeat(3, 1fr);
+    
   }
 }
 
@@ -104,5 +124,28 @@
         }
       }
     }
+  }
+}
+
+
+
+@media (max-width: 800px) {
+  .m-collection {
+    padding-inline: 2rem;
+    grid-template-columns: repeat(3, 1fr);
+
+
+    .empty-state{
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      img{
+        width: 300px;
+        text-align: center;
+        margin-inline: auto;
+      }
+    }
+
+
   }
 }

@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import "./Profile.scss";
 import { AuthContext } from "../Components/context";
 import { useNavigate } from "react-router-dom";
+import OpacityAnimation from "../Components/OpacityAnimation/OpacityAnimation";
 
 const Profile = (props) => {
   const { user, logout, username } = useContext(AuthContext);
@@ -22,28 +23,30 @@ const Profile = (props) => {
   console.log(username);
 
   return (
-    <div className="profile">
-      <p className="title">My Profile</p>
-      <div className="profile-options">
-        <div className="link-of-details">
-          <p>Username</p>
-          <p>{username ? username : "Empty"}</p>
+    <OpacityAnimation>
+      <div className="profile">
+        <p className="title">My Profile</p>
+        <div className="profile-options">
+          <div className="link-of-details">
+            <p>Username</p>
+            <p>{username ? username : "Empty"}</p>
+          </div>
+          <div className="link-of-details">
+            <p>User Email</p>
+            <p> {user && user.email}</p>
+          </div>
+          <div className="link-of-details">
+            <p>Subscription</p>
+            <p>FREE</p>
+          </div>
+          <div className="link-of-details">
+            <p>Premium</p>
+            <p>Unavailable</p>
+          </div>
         </div>
-        <div className="link-of-details">
-          <p>User Email</p>
-          <p> {user && user.email}</p>
-        </div>
-        <div className="link-of-details">
-          <p>Subscription</p>
-          <p>FREE</p>
-        </div>
-        <div className="link-of-details">
-          <p>Premium</p>
-          <p>Unavailable</p>
-        </div>
+        <button onClick={handleLogout}>Log out</button>
       </div>
-      <button onClick={handleLogout}>Log out</button>
-    </div>
+    </OpacityAnimation>
   );
 };
 
