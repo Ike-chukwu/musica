@@ -47,7 +47,7 @@ function App() {
           <SideNav />
           <div className="ex">
             <Sidebar />
-            <AnimatePresence mode="wait">
+            {/* <AnimatePresence mode="wait"> */}
               <Routes key={location.pathname} location={location}>
                 <Route path="/" element={<Home />} />
                 <Route path="/song/:id" element={<SongDetails />} />
@@ -60,7 +60,7 @@ function App() {
                   element={<Profile setLog={setLogin} loggedIn={loggedIn} />}
                 />
               </Routes>
-            </AnimatePresence>
+            {/* </AnimatePresence> */}
             {isRepeatClicked ? (
               <audio
                 onLoadedMetadata={onLoadedMetadata}
