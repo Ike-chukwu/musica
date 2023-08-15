@@ -104,7 +104,6 @@ const Slider = (props) => {
   const fetchDataMemoized = useCallback(() => {
     fetcher().then((result) => {
       setPlayListdata(result);
-      console.log(result);
     });
   }, []);
 
