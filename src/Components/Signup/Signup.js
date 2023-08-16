@@ -85,7 +85,7 @@ const Signup = (props) => {
 
   return (
     <AnimateFromRight>
-      <div className="container">
+      <div className="s-container">
         <div className="signin">
           <h2 className="heading">create account</h2>
           <form action="" onSubmit={submit}>

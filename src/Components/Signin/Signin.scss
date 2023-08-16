@@ -6,7 +6,7 @@
 
   .signin {
     width: 400px;
-    margin-top: 7rem;
+    margin-top: 8rem;
     position: relative;
     //   background: pink;
 
@@ -38,5 +38,12 @@
    transform: translateX(-50%);
    width: 100%;
    text-decoration: underline;
+  }
+}
+
+
+@media (max-width: 970px) {
+  .container {
+    padding-inline: 2rem;
   }
 }

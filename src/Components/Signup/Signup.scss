@@ -1,4 +1,4 @@
-.container {
+.s-container {
   display: flex;
   min-height: 100vh;
   justify-content: center;
@@ -6,7 +6,7 @@
 
   .signin {
     width: 400px;
-    // margin-top: 10rem;
+    margin-top: 8rem;
     position: relative;
 
     h2 {
@@ -44,7 +44,7 @@
 
 
 @media (max-width: 970px) {
-  .container {
+  .s-container {
     padding-inline: 2rem;
   }
 }

@@ -17,16 +17,29 @@ import { AuthContext } from "./Components/context";
 import UnderConstruction from "./Components/UnderConstructionPage/UnderConstruction";
 import { AnimatePresence } from "framer-motion";
 import { useLocation } from "react-router-dom";
+import Loader from "./Components/Loader/Loader"
 
 function App() {
   const status = localStorage.getItem("status") || "";
   const loginState = localStorage.getItem("loggedIn") || false;
 
   const [loggedIn, setLogin] = useState(loginState);
-  const [state, setStaate] = useState(status);
+  const [state, setState] = useState(status);
 
-  const { currentSong, musicRef, nextSong, audioElement, isRepeatClicked } =
-    useContext(AuthContext);
+  const {
+    currentSong,
+    musicRef,
+    nextSong,
+    audioElement,
+    isRepeatClicked,
+    destination,
+    setDestination,
+    loading,
+    firstPlaylistloading,
+    setFirstPlaylistloading,
+    secondPlaylistloading,
+    setSecondPlaylistloading,
+  } = useContext(AuthContext);
 
   const onLoadedMetadata = () => {
     const seconds = audioElement.current.duration;
@@ -41,7 +54,8 @@ function App() {
 
   return (
     <div className="App">
-      {loggedIn && state == "signedIn" ? (
+      {loggedIn && state == "signedIn" ? loading ||
+    firstPlaylistloading || secondPlaylistloading? <Loader/>:(
         <>
           <Navbar />
           <SideNav />

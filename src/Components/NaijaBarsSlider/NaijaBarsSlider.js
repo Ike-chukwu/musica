@@ -3,16 +3,12 @@ import React, {
   useRef,
   useEffect,
   useContext,
-  useCallback,
 } from "react";
-import "./Slider.css";
+import "./NaijaBarsSlider.css";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context";
 
-const Slider = (props) => {
-  const { secondPlayList, setSecondPlayList, firstPlayList, setFirstPlayList } =
-    useContext(AuthContext);
-
+const NaijaBarsSlider = (props) => {
   //drag functionality and state management
   const [isDown, setIsDown] = useState(false);
   const [isDragging, setIsDragging] = useState(false); // Flag for drag action
@@ -78,51 +74,22 @@ const Slider = (props) => {
     setDataType,
     mData,
     setMdata,
+    secondPlayList,
+    setSecondPlayList,
+    firstPlayList,
+    setFirstPlayList,
   } = useContext(AuthContext);
 
-  // // state that manages playlist data gotten from spotify api
-  // const [playListData, setPlayListdata] = useState();
-
-  // const fetcher = async () => {
-  //   const url = props.url;
-  //   const options = {
-  //     method: "GET",
-  //     headers: {
-  //       'X-RapidAPI-Key': '59e49d7a62mshd0ad2ae881b7debp1b303ajsnf487f30d0e69',
-  //       'X-RapidAPI-Host': 'spotify81.p.rapidapi.com'
-  //     },
-  //   };
-  //   try {
-  //     const response = await fetch(url, options);
-  //     const result = await response.json();
-  //     const musicData = result.items;
-  //     const trackData = musicData.map((item) => item.track);
-  //     return trackData;
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
-
-  // const fetchDataMemoized = useCallback(() => {
-  //   fetcher().then((result) => {
-  //     setPlayListdata(result);
-  //   });
-  // }, []);
-
-  // useEffect(() => {
-  //   fetchDataMemoized();
-  // }, [fetchDataMemoized]);
-
   let data;
-  if (firstPlayList) {
-    data = firstPlayList.map((item) => {
+  if (secondPlayList) {
+    data = secondPlayList.map((item) => {
       return (
         <Link
           to={`/song/${item.id}`}
           key={item.id}
           onClick={(e) => {
             handleLinkClick(e, item);
-            setGlobalMusicData(firstPlayList);
+            setGlobalMusicData(secondPlayList);
             setDataType(item.type);
           }}
         >
@@ -175,4 +142,4 @@ const Slider = (props) => {
   );
 };
 
-export default Slider;
+export default NaijaBarsSlider;

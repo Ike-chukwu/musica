@@ -4,6 +4,7 @@ import { AuthContext } from "../context";
 import { useNavigate } from "react-router-dom";
 import img from "../../images/carton.png";
 
+
 const MCollection = (props) => {
   const navigate = useNavigate();
 
@@ -83,7 +84,7 @@ const MCollection = (props) => {
               <div className="left">
                 <h4>{music.nameOfSong}</h4>
                 <p className="nam">{music.artist}</p>
-                <p className="name">23m likes </p>
+                {/* <p className="name">23m likes </p> */}
               </div>
               <div className="i fas fa-play"></div>
             </div>

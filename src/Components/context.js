@@ -13,6 +13,9 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
 
+  const [firstPlaylistloading, setFirstPlaylistloading] = useState(false);
+  const [secondPlaylistloading, setSecondPlaylistloading] = useState(false);
+
   //state that stores sidenav status
   const [isSideNavActive, setSideNav] = useState(false);
 
@@ -47,15 +50,15 @@ export const AuthProvider = ({ children }) => {
   //ref of auio element
   const audioElement = useRef();
 
-  const createUser = (email, password) => {
+  const createUser = async (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
-  const signIn = (email, password) => {
+  const signIn = async (email, password) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
 
-  const logout = () => {
+  const logout = async () => {
     return signOut(auth);
   };
 
@@ -63,8 +66,8 @@ export const AuthProvider = ({ children }) => {
   const nextSong = () => {
     console.log(mData);
     if (Array.isArray(mData) == false) {
-      // console.log(mData);
       audioElement.current.currentTime = 0;
+      setisPlaying(false);
     } else {
       let index = mData.findIndex((music) => music.name == currentSong.name);
       if (index >= mData.length - 1) {
@@ -112,11 +115,99 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
-      console.log(currentUser);
       setUser(currentUser);
     });
     return () => unSubscribe();
   }, []);
+
+  //fetching data for albums from spotify api
+  const [albums, setAlbums] = useState();
+  let listOfAlbums;
+  const fetchData = async () => {
+    const url =
+      "https://spotify81.p.rapidapi.com/albums?ids=2O9VJaLSnwjZ2HPpMaVoPU%252C73rKiFhHZatrwJL0B1F6hY%252C7bFrLfofeujIbvs4WcHn3p";
+    const options = {
+      method: "GET",
+      headers: {
+        "X-RapidAPI-Key": "ee6ea59f5emsh7f042e0bdfea334p1c0c92jsnd56540ecde70",
+        "X-RapidAPI-Host": "spotify81.p.rapidapi.com",
+      },
+    };
+    setLoading(true);
+    try {
+      const response = await fetch(url, options);
+      const result = await response.json();
+      listOfAlbums = result.albums;
+      setAlbums(listOfAlbums);
+      setLoading(false);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  //fetch data for trending
+  const [firstPlayList, setFirstPlayList] = useState();
+
+  const fetchFirstPlaylist = async () => {
+    const url =
+      "https://spotify81.p.rapidapi.com/playlist_tracks?id=37i9dQZF1DWX0o6sD1a6P5&offset=0&limit=100";
+    const options = {
+      method: "GET",
+      headers: {
+        "X-RapidAPI-Key": "ee6ea59f5emsh7f042e0bdfea334p1c0c92jsnd56540ecde70",
+        "X-RapidAPI-Host": "spotify81.p.rapidapi.com",
+      },
+    };
+   setFirstPlaylistloading(true)
+    try {
+      const response = await fetch(url, options);
+      const result = await response.json();
+      const musicData = result.items;
+      const trackData = musicData.map((item) => item.track);
+      setFirstPlayList(trackData);
+      setFirstPlaylistloading(false)
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  //fetch data for naija bars playlists
+  const [secondPlayList, setSecondPlayList] = useState();
+
+  const fetchSecondPlaylist = async () => {
+    const url =
+      "https://spotify81.p.rapidapi.com/playlist_tracks?id=37i9dQZF1DWUHcUDX0za7N&offset=0&limit=100";
+    const options = {
+      method: "GET",
+      headers: {
+        "X-RapidAPI-Key": "ee6ea59f5emsh7f042e0bdfea334p1c0c92jsnd56540ecde70",
+        "X-RapidAPI-Host": "spotify81.p.rapidapi.com",
+      },
+    };
+    setSecondPlaylistloading(true)
+    try {
+      const response = await fetch(url, options);
+      const result = await response.json();
+      const musicData = result.items;
+      const trackData = musicData.map((item) => item.track);
+      setSecondPlayList(trackData);
+      setSecondPlaylistloading(false)
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    if (!albums) {
+      fetchData();
+    }
+    if (!firstPlayList) {
+      fetchFirstPlaylist();
+    }
+    if (!secondPlayList) {
+      fetchSecondPlaylist();
+    }
+  }, [albums, firstPlayList, secondPlayList]);
 
   return (
     <AuthContext.Provider
@@ -166,6 +257,16 @@ export const AuthProvider = ({ children }) => {
         setClickedclickedItemFromLikes,
         loading,
         setLoading,
+        albums,
+        setAlbums,
+        secondPlayList,
+        setSecondPlayList,
+        firstPlayList,
+        setFirstPlayList,
+        firstPlaylistloading,
+        setFirstPlaylistloading,
+        secondPlaylistloading,
+        setSecondPlaylistloading,
       }}
     >
       {children}
