@@ -11,7 +11,6 @@ import { AuthContext } from "../context";
 import { useNavigate } from "react-router-dom";
 
 const TopCharts = () => {
-  const [albums, setAlbums] = useState();
 
   const {
     globalMusicData,
@@ -20,6 +19,8 @@ const TopCharts = () => {
     setDataType,
     mData,
     setMdata,
+    albums,
+   setAlbums,
   } = useContext(AuthContext);
 
   //drag functionality and state management
@@ -83,41 +84,8 @@ const TopCharts = () => {
     itemsContainer.current.scrollLeft = scrollLeftState - mouseMoved;
   }, [scrollLeftState, mouseMoved]);
 
-  //fetching data for charts from spotify albums endpoint
-  let listOfAlbums;
-  const fetchData = async () => {
-    const url = 'https://spotify81.p.rapidapi.com/albums?ids=2O9VJaLSnwjZ2HPpMaVoPU%252C73rKiFhHZatrwJL0B1F6hY%252C7bFrLfofeujIbvs4WcHn3p';
-    const options = {
-      method: 'GET',
-      headers: {
-        'X-RapidAPI-Key': '59e49d7a62mshd0ad2ae881b7debp1b303ajsnf487f30d0e69',
-        'X-RapidAPI-Host': 'spotify81.p.rapidapi.com'
-      }
-    };
-
-    try {
-      const response = await fetch(url, options);
-      const result = await response.json();
-      listOfAlbums = result.albums;
-      return listOfAlbums;
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   
 
-
-  //get data
-  const fetchDataMemoized = useCallback(() => {
-    fetchData().then((result) => {
-      setAlbums(result);
-    });
-  }, []);
-
-  useEffect(() => {
-    fetchDataMemoized();
-  }, [fetchDataMemoized]);
 
   let renderedData;
 

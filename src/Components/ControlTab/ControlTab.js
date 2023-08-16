@@ -19,43 +19,39 @@ const ControlTab = (props) => {
     audioElement,
     repeatSong,
     isRepeatedClicked,
-    shuffleSong
+    shuffleSong,
   } = useContext(AuthContext);
 
   //state that controls volume
   const [volume, setVolume] = useState(60);
 
-  const [mute, setMute] = useState(false)
+  const [mute, setMute] = useState(false);
 
-
-
-
-//monitiors the song progress
+  //monitiors the song progress
   const playAnimationRef = useRef();
   const repeat = useCallback(() => {
-    const currentTime = audioElement.current.currentTime;
-    props.setTimeProgress(currentTime);
-    musicRef.current.value = currentTime;
-    musicRef.current.style.setProperty(
-      "$range-progress",
-      `${(musicRef.current.value / props.duration) * 100}%`
-    );
+    if (currentSong && audioElement && audioElement.current) {
+      const currentTime = audioElement.current.currentTime;
+      props.setTimeProgress(currentTime);
+      musicRef.current.value = currentTime;
+      musicRef.current.style.setProperty(
+        "$range-progress",
+        `${(musicRef.current.value / props.duration) * 100}%`
+      );
 
-    playAnimationRef.current = requestAnimationFrame(repeat);
+      playAnimationRef.current = requestAnimationFrame(repeat);
+    }
   }, [audioElement, props.duration, musicRef]);
-
 
   //monitors the play/pause state of the music player
   useEffect(() => {
     if (isPlaying && currentSong) {
       audioElement.current.play();
-    } else if(isPlaying == false) {
+    } else if (isPlaying == false) {
       audioElement.current.pause();
     }
     playAnimationRef.current = requestAnimationFrame(repeat);
   }, [isPlaying, repeat, currentSong]);
-
-
 
   //function that toggles between play/pause
   const handleClick = () => {
@@ -66,18 +62,14 @@ const ControlTab = (props) => {
   const handleProgressChange = () => {
     audioElement.current.currentTime = musicRef.current.value;
   };
- 
- 
 
   //adjusts the volume and mute state when the volume is changed
   useEffect(() => {
-    if(audioElement && currentSong){
+    if (audioElement && currentSong) {
       audioElement.current.volume = volume / 100;
       audioElement.current.muted = mute;
     }
   }, [volume, audioElement, mute, currentSong]);
-
-
 
   return (
     <div className="controls">
@@ -91,7 +83,7 @@ const ControlTab = (props) => {
       <div className="play-controls">
         <div className="top">
           <i onClick={shuffleSong} class="fas fa-shuffle"></i>
-          <i class="fa fa-caret-left" onClick={prevSong}></i>
+          <i className="fa fa-caret-left" onClick={prevSong}></i>
           <i
             onClick={handleClick}
             class={isPlaying ? "fas fa-pause" : "fas fa-play"}
@@ -108,7 +100,12 @@ const ControlTab = (props) => {
         />
       </div>
       <div className="volume-controls">
-        <i onClick={()=> setMute(!mute)} class={mute || volume <= 0 ? "fas fa-volume-mute":"fas fa-volume-up"}></i>
+        <i
+          onClick={() => setMute(!mute)}
+          class={
+            mute || volume <= 0 ? "fas fa-volume-mute" : "fas fa-volume-up"
+          }
+        ></i>
         <input
           type="range"
           min={0}

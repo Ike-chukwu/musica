@@ -4,7 +4,8 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context";
 
 const BottomDetail = (props) => {
-  const { dataType, setCurrentSong, setisPlaying } = useContext(AuthContext);
+  const { dataType, setCurrentSong, setisPlaying, isPlaying, audioElement } =
+    useContext(AuthContext);
 
   const [image, setImg] = useState();
   const [tracks, setTracks] = useState();
@@ -32,6 +33,9 @@ const BottomDetail = (props) => {
       arTistName: artist,
     };
     setCurrentSong(musicDetails);
+    if (isPlaying) {
+      audioElement.current.currentTime = 0;
+    }
     setisPlaying(true);
   };
 
@@ -40,7 +44,6 @@ const BottomDetail = (props) => {
     const conversionToSeconds = Math.floor(time / 1000);
     const minutes = Math.floor(conversionToSeconds / 60);
     const seconds = conversionToSeconds % 60;
-    console.log(`${minutes}:${seconds}`);
     if (seconds < 10) {
       return `${minutes}:0${seconds}`;
     }
@@ -48,9 +51,10 @@ const BottomDetail = (props) => {
   };
 
   if (tracks) {
-    songRender = tracks.map((track) => {
+    songRender = tracks.map((track, index) => {
       return (
         <div
+          key={index}
           className="music-card"
           onClick={() => playSong(image, track.name, aName, track.preview_url)}
         >

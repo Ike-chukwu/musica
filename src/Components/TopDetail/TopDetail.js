@@ -11,6 +11,18 @@ const TopDetail = (props) => {
     setCollection,
     likes,
     setlikes,
+    setisPlaying,
+    isPlaying,
+    audioElement,
+    fromCollection,
+    setFromCollection,
+    fromlikes,
+    setFromLikes,
+    mData,
+    setMdata,
+    setCurrentSong,
+    currentSong,
+    setDestination
   } = useContext(AuthContext);
 
   const [itemInFocus, setItemInFocus] = useState(null);
@@ -20,6 +32,7 @@ const TopDetail = (props) => {
   const [tracks, setTracks] = useState([]);
   const [isInCollection, setIsInCollection] = useState();
   const [isInLikes, setIsInLikes] = useState();
+  const [musicCategory,setMusicCategory]= useState()
 
   let foundItem;
 
@@ -37,6 +50,7 @@ const TopDetail = (props) => {
         setCover(foundItem.images[0].url);
         setTracks(foundItem.tracks.items);
       }
+      // setMusicCategory(foundItem.type);
     } else if (globalMusicData && dataType === "track") {
       if (Array.isArray(globalMusicData) == false) {
         foundItem = globalMusicData;
@@ -49,16 +63,20 @@ const TopDetail = (props) => {
         setArtistName(foundItem.album.artists[0].name);
         setCover(foundItem.album.images[1].url);
       }
+      // setMusicCategory(foundItem.type); 
     }
 
     //state that stores the boolean returned if the music is present in collection array
     setIsInCollection(
       collection.find((item) => item.identification == props.id)
     );
-    
     //state that stores the boolean returned if the music is present in likes array
     setIsInLikes(likes.find((item) => item.identification == props.id));
+    
+    
+   
   }, [globalMusicData, dataType, props.id]);
+
 
   //add song to collection
   const addToCollection = (
@@ -113,6 +131,79 @@ const TopDetail = (props) => {
     setlikes(filteredLikes);
   };
 
+    //function attached to play all button in top part of song details page
+    const playAllButtonHandler = (category,cover, artistName) => {
+      if(category == 'album'){
+        if(isPlaying){
+          const newlyNavigatedSong = itemInFocus.tracks.items[0].preview_url
+          const currentSongSrc = currentSong.src
+          if(currentSongSrc == newlyNavigatedSong ){
+            audioElement.current.currentTime = 0;
+          }
+          else{
+            const songName = itemInFocus.tracks.items[0].name
+            const songSrc = itemInFocus.tracks.items[0].preview_url
+            const musicDetails = {
+              name: songName,
+              src: songSrc,
+              img: cover,
+              arTistName: artistName,
+            };
+            setCurrentSong(musicDetails);
+            setisPlaying(true);
+          }
+        }
+        else{      
+            const songName = itemInFocus.tracks.items[0].name
+            const songSrc = itemInFocus.tracks.items[0].preview_url
+            const musicDetails = {
+              name: songName,
+              src: songSrc,
+              img: cover,
+              arTistName: artistName,
+            };
+            setCurrentSong(musicDetails);
+            setisPlaying(true);
+        }
+      }
+      else if(category == 'track'){
+        if(isPlaying){
+          const newlyNavigatedSong = itemInFocus.preview_url
+          const currentSongSrc = currentSong.src
+          if(currentSongSrc == newlyNavigatedSong ){
+            audioElement.current.currentTime = 0;
+          }
+          else{
+            const songName = itemInFocus.name
+            const songSrc = itemInFocus.preview_url
+            const musicDetails = {
+              name: songName,
+              src: songSrc,
+              img: cover,
+              arTistName: artistName,
+            };
+            setCurrentSong(musicDetails);
+            setisPlaying(true);
+          }
+        }
+        else{      
+          const songName = itemInFocus.name
+          const songSrc = itemInFocus.preview_url
+          const musicDetails = {
+            name: songName,
+            src: songSrc,
+            img: cover,
+            arTistName: artistName,
+          };
+          setCurrentSong(musicDetails);
+          setisPlaying(true);
+        }
+      }
+    };
+
+   
+   
+
   return (
     <div className="t-detail">
       <div className="left-part">
@@ -127,7 +218,7 @@ const TopDetail = (props) => {
           <p>{`${noOfTracks} songs`}</p>
         </div>
         <div className="btn-pack">
-          <div className="btn" onClick={() => props.playSong()}>
+          <div className="btn" onClick={() => playAllButtonHandler(itemInFocus.type, cover, artistName)}>
             <i className="fas fa-play"></i>
             <span>Play all</span>
           </div>

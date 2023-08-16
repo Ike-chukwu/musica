@@ -5,11 +5,12 @@ import { useNavigate } from "react-router-dom";
 import OpacityAnimation from "../Components/OpacityAnimation/OpacityAnimation";
 
 const Profile = (props) => {
-  const { user, logout, username } = useContext(AuthContext);
+  const { user, logout, username, audioElement } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleLogout = async (e) => {
     try {
+      audioElement.current = null;
       await logout();
       navigate("/");
       props.setLog(false);
@@ -20,7 +21,7 @@ const Profile = (props) => {
       console.log(e.message);
     }
   };
-  console.log(username);
+  
 
   return (
     <OpacityAnimation>
