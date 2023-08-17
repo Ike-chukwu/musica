@@ -105,7 +105,6 @@ const Signup = (props) => {
               );
             })}
             <button>
-              {" "}
               {loading ? "Sigining Up" : "Sign Up"}{" "}
               {loading ? <i className="fa fa-refresh fa-spin"></i> : null}
             </button>

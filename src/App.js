@@ -40,6 +40,7 @@ function App() {
     secondPlaylistloading,
     setSecondPlaylistloading,
   } = useContext(AuthContext);
+  
 
   const onLoadedMetadata = () => {
     const seconds = audioElement.current.duration;

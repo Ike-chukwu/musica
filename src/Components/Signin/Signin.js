@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context";
 import AnimateFromRight from "../AnimateFromRight/AnimateFromRight";
 
+
 const Signin = (props) => {
   const { signIn } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
@@ -21,7 +22,6 @@ const Signin = (props) => {
 
   const onChangeHandler = (e, id) => {
     const name = e.target.name;
-    console.log(name);
     setData({
       ...data,
       [name]: e.target.value,

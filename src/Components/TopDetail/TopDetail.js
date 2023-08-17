@@ -14,15 +14,8 @@ const TopDetail = (props) => {
     setisPlaying,
     isPlaying,
     audioElement,
-    fromCollection,
-    setFromCollection,
-    fromlikes,
-    setFromLikes,
-    mData,
-    setMdata,
     setCurrentSong,
     currentSong,
-    setDestination
   } = useContext(AuthContext);
 
   const [itemInFocus, setItemInFocus] = useState(null);

@@ -11,56 +11,65 @@ import { useEffect } from "react";
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [loading, setLoading] = useState(false);
 
+  //state that stores signup  info
+  const [user, setUser] = useState({});
+  const [username, setUsername] = useState("");
+
+  //function that creates a new user
+  const createUser = async (email, password) => {
+    return createUserWithEmailAndPassword(auth, email, password);
+  };
+
+  //function that signs in a user
+  const signIn = async (email, password) => {
+    return signInWithEmailAndPassword(auth, email, password);
+  };
+
+   //function that logs a user out
+  const logout = async () => {
+    return signOut(auth);
+  };
+
+
+
+
+  //loading state of all api calls
+  const [loading, setLoading] = useState(false);
   const [firstPlaylistloading, setFirstPlaylistloading] = useState(false);
   const [secondPlaylistloading, setSecondPlaylistloading] = useState(false);
 
   //state that stores sidenav status
   const [isSideNavActive, setSideNav] = useState(false);
 
-  const [user, setUser] = useState({});
-  const [username, setUsername] = useState("");
 
+
+
+  //state that stores music data need for play functionality
   const [musicList, setMusic] = useState([]);
   const [currentSong, setCurrentSong] = useState();
   const [isPlaying, setisPlaying] = useState(false);
   const [isRepeatClicked, setIsRepeatClicked] = useState(false);
-
-  //different states for api calls for new releases section
   const [title, setTitle] = useState();
   const [mData, setMdata] = useState();
-
   const [globalMusicData, setGlobalMusicData] = useState();
-
+  
+  // state that holds the current nav location in collection
   const [activeButton, setActiveButton] = useState("collection");
-
   const [collection, setCollection] = useState([]);
   const [fromCollection, setFromCollection] = useState(false);
   const [clickedItemFromCollection, setClickedclickedItemFromCollection] =
     useState();
-
   const [likes, setlikes] = useState([]);
   const [fromlikes, setFromLikes] = useState(false);
   const [clickedItemFromLikes, setClickedclickedItemFromLikes] = useState();
-
+  //stores the type of of data whether album or music
   const [dataType, setDataType] = useState(null);
   // ref of progress bar
   const musicRef = useRef();
   //ref of auio element
   const audioElement = useRef();
 
-  const createUser = async (email, password) => {
-    return createUserWithEmailAndPassword(auth, email, password);
-  };
-
-  const signIn = async (email, password) => {
-    return signInWithEmailAndPassword(auth, email, password);
-  };
-
-  const logout = async () => {
-    return signOut(auth);
-  };
 
   //function that plays the next song
   const nextSong = () => {

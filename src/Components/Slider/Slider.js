@@ -72,46 +72,10 @@ const Slider = (props) => {
 
   //fetching data
   const {
-    globalMusicData,
     setGlobalMusicData,
-    dataType,
     setDataType,
-    mData,
-    setMdata,
   } = useContext(AuthContext);
 
-  // // state that manages playlist data gotten from spotify api
-  // const [playListData, setPlayListdata] = useState();
-
-  // const fetcher = async () => {
-  //   const url = props.url;
-  //   const options = {
-  //     method: "GET",
-  //     headers: {
-  //       'X-RapidAPI-Key': '59e49d7a62mshd0ad2ae881b7debp1b303ajsnf487f30d0e69',
-  //       'X-RapidAPI-Host': 'spotify81.p.rapidapi.com'
-  //     },
-  //   };
-  //   try {
-  //     const response = await fetch(url, options);
-  //     const result = await response.json();
-  //     const musicData = result.items;
-  //     const trackData = musicData.map((item) => item.track);
-  //     return trackData;
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
-
-  // const fetchDataMemoized = useCallback(() => {
-  //   fetcher().then((result) => {
-  //     setPlayListdata(result);
-  //   });
-  // }, []);
-
-  // useEffect(() => {
-  //   fetchDataMemoized();
-  // }, [fetchDataMemoized]);
 
   let data;
   if (firstPlayList) {

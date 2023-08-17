@@ -10,12 +10,7 @@ const SongDetails = () => {
   const {
     globalMusicData,
     dataType,
-    mData,
     setMdata,
-    setCurrentSong,
-    setisPlaying,
-    isPlaying,
-    audioElement,
     fromCollection,
     setFromCollection,
     fromlikes,

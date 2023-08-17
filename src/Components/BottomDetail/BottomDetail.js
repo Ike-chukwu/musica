@@ -3,6 +3,7 @@ import "./BottomDetail.scss";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context";
 
+
 const BottomDetail = (props) => {
   const { dataType, setCurrentSong, setisPlaying, isPlaying, audioElement } =
     useContext(AuthContext);

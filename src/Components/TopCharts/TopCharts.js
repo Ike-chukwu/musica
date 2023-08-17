@@ -3,7 +3,6 @@ import React, {
   useRef,
   useEffect,
   useContext,
-  useCallback,
 } from "react";
 import "./TopCharts.scss";
 import { Link } from "react-router-dom";
@@ -13,15 +12,11 @@ import { useNavigate } from "react-router-dom";
 const TopCharts = () => {
 
   const {
-    globalMusicData,
     setGlobalMusicData,
-    dataType,
     setDataType,
-    mData,
-    setMdata,
     albums,
-   setAlbums,
   } = useContext(AuthContext);
+
 
   //drag functionality and state management
   const itemsContainer = useRef();
@@ -32,6 +27,7 @@ const TopCharts = () => {
   const [mouseMoved, setMouseMoved] = useState(0);
   const [isDragging, setIsDragging] = useState(false); // Flag for drag action
 
+
   //function thet is triggered when mouse is clicked down
   const handleMouseDown = (e) => {
     e.preventDefault();
@@ -41,6 +37,7 @@ const TopCharts = () => {
     setScrollLeftState(itemsContainer.current.scrollLeft);
     setMouseMoved(0);
   };
+
 
   //function thet is triggered when cursor is moved
   const handleMouseMove = (e) => {
@@ -56,6 +53,7 @@ const TopCharts = () => {
     }
   };
 
+
   //function thet is triggered when cursor is moved
   const handleMouseUp = () => {
     setIsDown(false);
@@ -65,6 +63,7 @@ const TopCharts = () => {
     }
   };
 
+
   //function that is triggered when link is clicked
   const handleLinkClick = (e, id) => {
     if (isDragging) {
@@ -73,6 +72,7 @@ const TopCharts = () => {
       navigate(`/song/${id}`);
     }
   };
+
 
   useEffect(() => {
     if (isDown) {
@@ -111,7 +111,6 @@ const TopCharts = () => {
               <div className="text">
                 <h5 className="s-title">{name}</h5>
                 <p className="a-name">{artistName}</p>
-                {/* <p className="a-name">{type}</p> */}
                 <p className="duration">{date}</p>
               </div>
             </div>
@@ -155,7 +154,6 @@ const TopCharts = () => {
                 <p className="s-title">{name}</p>
                 <p className="a-name">{artistName}</p>
               </div>
-              {/* <p className="duration">2:34:45</p> */}
             </div>
             <i className="fas fa-heart"></i>
           </div>

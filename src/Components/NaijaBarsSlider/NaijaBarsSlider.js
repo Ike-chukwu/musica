@@ -68,16 +68,9 @@ const NaijaBarsSlider = (props) => {
 
   //fetching data
   const {
-    globalMusicData,
     setGlobalMusicData,
-    dataType,
     setDataType,
-    mData,
-    setMdata,
     secondPlayList,
-    setSecondPlayList,
-    firstPlayList,
-    setFirstPlayList,
   } = useContext(AuthContext);
 
   let data;
