@@ -6,7 +6,7 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDUaAs6KB0kLOrvEILQHDMEKxE71-WadxI",
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: "musica-auth.firebaseapp.com",
   projectId: "musica-auth",
   storageBucket: "musica-auth.appspot.com",

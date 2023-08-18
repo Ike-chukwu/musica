@@ -1,6 +1,6 @@
 import React from "react";
 import "./Latest.scss";
-import artist from "../../images/Pexels Photo by Eric Esma.png";
+import artist from "../../images/odumodu.png";
 import p1 from "../../images/Ellipse 2.png";
 import p2 from "../../images/Ellipse 3.png";
 import p3 from "../../images/Ellipse 4.png";

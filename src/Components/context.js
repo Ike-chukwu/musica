@@ -138,7 +138,7 @@ export const AuthProvider = ({ children }) => {
     const options = {
       method: "GET",
       headers: {
-        "X-RapidAPI-Key": "ee6ea59f5emsh7f042e0bdfea334p1c0c92jsnd56540ecde70",
+        "X-RapidAPI-Key":  process.env.REACT_APP_SPOTIFY_API_KEY,
         "X-RapidAPI-Host": "spotify81.p.rapidapi.com",
       },
     };
@@ -163,7 +163,7 @@ export const AuthProvider = ({ children }) => {
     const options = {
       method: "GET",
       headers: {
-        "X-RapidAPI-Key": "ee6ea59f5emsh7f042e0bdfea334p1c0c92jsnd56540ecde70",
+        "X-RapidAPI-Key": process.env.REACT_APP_SPOTIFY_API_KEY,
         "X-RapidAPI-Host": "spotify81.p.rapidapi.com",
       },
     };
@@ -189,7 +189,7 @@ export const AuthProvider = ({ children }) => {
     const options = {
       method: "GET",
       headers: {
-        "X-RapidAPI-Key": "ee6ea59f5emsh7f042e0bdfea334p1c0c92jsnd56540ecde70",
+        "X-RapidAPI-Key":  process.env.REACT_APP_SPOTIFY_API_KEY,
         "X-RapidAPI-Host": "spotify81.p.rapidapi.com",
       },
     };

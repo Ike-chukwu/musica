@@ -98,9 +98,8 @@ const Signin = (props) => {
           <span>
             Don't have an account?{" "}
             <Link to="/signup" style={{ color: "white" }}>
-              {" "}
               Sign Up
-            </Link>{" "}
+            </Link>
           </span>
         </div>
       </div>

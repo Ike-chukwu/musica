@@ -1,0 +1,33 @@
+.songDetails {
+  width: 100%;
+  min-height: 100vh;
+  padding-right: 4.5rem;
+  position: relative;
+  --bg-image: none;
+}
+
+
+.songDetails::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height:  100%;
+  top: -100px;
+  z-index: -1;
+  background-image: var(--bg-image);
+  opacity: .2;
+  filter: blur(4px);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+@media (max-width: 970px) {
+  .songDetails {
+    padding-right: 0;
+  }
+
+  .songDetails::after {
+    background-image: none;
+  }
+}

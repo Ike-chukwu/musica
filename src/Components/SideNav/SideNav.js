@@ -35,7 +35,7 @@ const SideNav = () => {
       className={isSideNavActive ? "sideNav active" : "sideNav"}
     >
       <ul className="link-pack">
-        <Link to="/">
+        <Link to="/" onClick={() => setSideNav(false)}>
           <li className="link">
             <i
               className={
@@ -45,7 +45,7 @@ const SideNav = () => {
             <span className="name">home</span>
           </li>
         </Link>
-        <Link to="/collection">
+        <Link to="/collection" onClick={() => setSideNav(false)}>
           <li className="link">
             <i
               className={
@@ -57,7 +57,7 @@ const SideNav = () => {
             <span className="name">my collections</span>
           </li>
         </Link>
-        <Link to='/radio'>
+        <Link to='/radio' onClick={() => setSideNav(false)}>
           <li className="link">
             <i
               className={
@@ -69,7 +69,7 @@ const SideNav = () => {
             <span className="name">radio</span>
           </li>
         </Link>
-        <Link to='/video'>
+        <Link to='/video' onClick={() => setSideNav(false)}>
           <li className="link">
             <i
               className={
@@ -81,7 +81,7 @@ const SideNav = () => {
             <span className="name">music videos</span>
           </li>
         </Link>
-        <Link to="/profile">
+        <Link to="/profile" onClick={() => setSideNav(false)}>
           <li className="link">
             <i
               className={
@@ -93,7 +93,7 @@ const SideNav = () => {
             <span className="name">profile</span>
           </li>
         </Link>
-        <Link>
+        <Link onClick={() => setSideNav(false)}>
           <li className="link">
             <i className="fas fa-sign-out"></i>
             <span className="name">log out</span>

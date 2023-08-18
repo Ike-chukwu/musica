@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context";
 import AnimateFromRight from "../AnimateFromRight/AnimateFromRight";
 
-const Signup = (props) => {
+const Signup = () => {
   const { createUser, setUsername } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
@@ -66,15 +66,15 @@ const Signup = (props) => {
       errorMessage: "Invalid email!",
     },
     {
-      placeholder: "Enter your password",
+      placeholder: "Password should not be less than 6 characters",
       required: true,
       name: "password",
       type: "password",
-      errorMessage: "This password is too weak",
+      errorMessage: "Your password is less than six characters",
       pattern: "^.{6,}$",
     },
     {
-      placeholder: "Enter your password",
+      placeholder: "Confirm password",
       required: true,
       name: "confirm password",
       type: "password",

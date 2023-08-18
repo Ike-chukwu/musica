@@ -12,7 +12,7 @@ const Input = (props) => {
     }
 
   return (
-    <div className={styles.div} key={props.key}>
+    <div className={styles.div}>
         <label htmlFor="">{props.name}</label>
         <input type={props.type} {...props} onBlur={blurFlunc} focused={focus.toString()} onChange={(e) => props.inputTrigger(e, props.name)}  />
         <p className={styles.paragraph}>{props.errorMessage}</p>

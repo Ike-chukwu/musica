@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
-import "./SongDetails.scss";
+import React, { useContext, useEffect, useState, useRef } from "react";
+import "./SongDetails.css";
 import TopDetail from "../TopDetail/TopDetail";
 import BottomDetail from "../BottomDetail/BottomDetail";
 import { useParams } from "react-router-dom";
@@ -21,6 +21,7 @@ const SongDetails = () => {
   const { id } = useParams();
   let itemInFocus;
   const [dataToBePassed, setDataToBePassed] = useState();
+  const pictureContainer = useRef()
 
   useEffect(() => {
     if (globalMusicData) {
@@ -48,6 +49,7 @@ const SongDetails = () => {
               name,
               total_tracks,
             });
+            pictureContainer.current.style.setProperty("--bg-image", `url(${albumImg})`)
           }
         } else if (dataType == "track") {
           if (Array.isArray(globalMusicData) == false) {
@@ -69,6 +71,7 @@ const SongDetails = () => {
               total_tracks: 1,
               tracks: [{ duration_ms, name, preview_url }],
             });
+            pictureContainer.current.style.setProperty("--bg-image", `url(${albumImg})`)
           }
         }
         setFromCollection(false);
@@ -96,6 +99,7 @@ const SongDetails = () => {
               name,
               total_tracks,
             });
+            pictureContainer.current.style.setProperty("--bg-image", `url(${albumImg})`)
           }
         } else if (dataType == "track") {
           if (Array.isArray(globalMusicData) == false) {
@@ -117,6 +121,7 @@ const SongDetails = () => {
               total_tracks: 1,
               tracks: [{ duration_ms, name, preview_url }],
             });
+            pictureContainer.current.style.setProperty("--bg-image", `url(${albumImg})`)
           }
         }
         setFromLikes(false);
@@ -143,6 +148,7 @@ const SongDetails = () => {
             name,
             total_tracks,
           });
+          pictureContainer.current.style.setProperty("--bg-image", `url(${albumImg})`)
         } else if (dataType == "track") {
           itemInFocus = globalMusicData.find((item) => item.id == id);
           const { preview_url, name, duration_ms } = itemInFocus;
@@ -162,6 +168,7 @@ const SongDetails = () => {
             total_tracks: 1,
             tracks: [{ duration_ms, name, preview_url }],
           });
+          pictureContainer.current.style.setProperty("--bg-image", `url(${albumImg})`)
         }
       }
     }
@@ -171,7 +178,7 @@ const SongDetails = () => {
 
   return (
     <OpacityAnimation>
-      <div className="songDetails">
+      <div className="songDetails" ref={pictureContainer}>
         <TopDetail id={id}  />
         <BottomDetail id={id} data={dataToBePassed} dataType={dataType} />
       </div>

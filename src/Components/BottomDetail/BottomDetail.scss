@@ -51,6 +51,7 @@
 
 @media (max-width: 970px) {
   .b-detail {
+    margin-inline: 2rem;
     .music-card {
       .img-like {
         gap: unset;
@@ -100,5 +101,13 @@
         }
       }
     }
+  }
+}
+
+
+@media (max-width: 700px) {
+  .b-detail {
+    margin-top: unset;
+    padding-block: 5rem;
   }
 }
