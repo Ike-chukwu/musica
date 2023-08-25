@@ -88,9 +88,7 @@ const ControlTab = (props) => {
             onClick={handleClick}
             className={isPlaying ? "fas fa-pause" : "fas fa-play"}
           ></i>
-          {/* <i class="fas fa-pause"></i> */}
           <i class="fa fa-caret-right" onClick={nextSong}></i>
-          {/* <i class="fa fa-repeat" onClick={repeatSong}></i> */}
         </div>
         <input
           defaultValue="0"

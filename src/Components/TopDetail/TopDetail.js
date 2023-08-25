@@ -43,7 +43,6 @@ const TopDetail = (props) => {
         setCover(foundItem.images[0].url);
         setTracks(foundItem.tracks.items);
       }
-      // setMusicCategory(foundItem.type);
     } else if (globalMusicData && dataType === "track") {
       if (Array.isArray(globalMusicData) == false) {
         foundItem = globalMusicData;
@@ -56,7 +55,6 @@ const TopDetail = (props) => {
         setArtistName(foundItem.album.artists[0].name);
         setCover(foundItem.album.images[1].url);
       }
-      // setMusicCategory(foundItem.type); 
     }
 
     //state that stores the boolean returned if the music is present in collection array

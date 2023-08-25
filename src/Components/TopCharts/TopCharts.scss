@@ -8,7 +8,6 @@
     margin-top: 5rem;
     color: white;
     height: 400px;
-    // overflow-y: scroll;
     width: 100%;
     h3 {
       font-size: 2.4rem;
@@ -85,7 +84,6 @@
 @media (max-width: 970px) {
   .parent-Cont {
     width: 100%;
-    // margin-top: 5rem;
     .top-charts {
       display: none;
     }
@@ -99,7 +97,6 @@
       }
       .item-container {
         width: 100%;
-        /* height: 300px; */
         overflow: hidden;
         white-space: nowrap;
         padding-block: 1rem;
