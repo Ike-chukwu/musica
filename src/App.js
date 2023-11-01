@@ -12,16 +12,17 @@ import Radio from "../src/Pages/Radio";
 import SideNav from "./Components/SideNav/SideNav";
 import ControlTab from "./Components/ControlTab/ControlTab";
 import SongDetails from "./Components/SongDetails/SongDetails";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "./Components/context";
 import UnderConstruction from "./Components/UnderConstructionPage/UnderConstruction";
 import { AnimatePresence } from "framer-motion";
 import { useLocation } from "react-router-dom";
-import Loader from "./Components/Loader/Loader"
+import Loader from "./Components/Loader/Loader";
+import { onAuthStateChanged } from "firebase/auth";
 
 function App() {
   const status = localStorage.getItem("status") || "";
-  const loginState = localStorage.getItem("loggedIn") || false;
+  const loginState = localStorage.getItem("loggedIn") === "true";
 
   const [loggedIn, setLogin] = useState(loginState);
   const [state, setState] = useState(status);
@@ -35,12 +36,30 @@ function App() {
     destination,
     setDestination,
     loading,
+    user,
     firstPlaylistloading,
     setFirstPlaylistloading,
     secondPlaylistloading,
     setSecondPlaylistloading,
   } = useContext(AuthContext);
-  
+
+  useEffect(() => {
+    // const unsubscribe = onAuthStateChanged((user) => {
+      if (user) {
+        setLogin(true);
+        setState("signedIn");
+
+        localStorage.setItem("loggedIn", "true");
+      } else {
+        setLogin(false);
+        setState("");
+
+        localStorage.removeItem("loggedIn");
+      }
+   
+
+    // return () => unsubscribe();
+  }, []);
 
   const onLoadedMetadata = () => {
     const seconds = audioElement.current.duration;
@@ -55,52 +74,55 @@ function App() {
 
   return (
     <div className="App">
-      {loggedIn && state == "signedIn" ? loading ||
-    firstPlaylistloading || secondPlaylistloading? <Loader/>:(
-        <>
-          <Navbar />
-          <SideNav />
-          <div className="ex">
-            <Sidebar />
-            <AnimatePresence mode="wait">
-              <Routes key={location.pathname} location={location}>
-                <Route path="/" element={<Home />} />
-                <Route path="/song/:id" element={<SongDetails />} />
-                <Route path="/collection" element={<Collection />} />
-                <Route path="/logout" element={<Logout />} />
-                <Route path="/radio" element={<UnderConstruction />} />
-                <Route path="/video" element={<UnderConstruction />} />
-                <Route
-                  path="/profile"
-                  element={<Profile setLog={setLogin} loggedIn={loggedIn} />}
+      {loggedIn && state == "signedIn" ? (
+        loading || firstPlaylistloading || secondPlaylistloading ? (
+          <Loader />
+        ) : (
+          <>
+            <Navbar />
+            <SideNav />
+            <div className="ex">
+              <Sidebar />
+              <AnimatePresence mode="wait">
+                <Routes key={location.pathname} location={location}>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/song/:id" element={<SongDetails />} />
+                  <Route path="/collection" element={<Collection />} />
+                  <Route path="/logout" element={<Logout />} />
+                  <Route path="/radio" element={<UnderConstruction />} />
+                  <Route path="/video" element={<UnderConstruction />} />
+                  <Route
+                    path="/profile"
+                    element={<Profile setLog={setLogin} loggedIn={loggedIn} />}
+                  />
+                </Routes>
+              </AnimatePresence>
+              {isRepeatClicked ? (
+                <audio
+                  onLoadedMetadata={onLoadedMetadata}
+                  src={currentSong ? currentSong.src : null}
+                  ref={audioElement}
+                  onEnded={nextSong}
+                  loop
+                ></audio>
+              ) : (
+                <audio
+                  onLoadedMetadata={onLoadedMetadata}
+                  src={currentSong ? currentSong.src : null}
+                  ref={audioElement}
+                  onEnded={nextSong}
+                ></audio>
+              )}
+              {currentSong && (
+                <ControlTab
+                  duration={duration}
+                  setTimeProgress={setTimeProgress}
+                  audioElement={audioElement}
                 />
-              </Routes>
-            </AnimatePresence>
-            {isRepeatClicked ? (
-              <audio
-                onLoadedMetadata={onLoadedMetadata}
-                src={currentSong ? currentSong.src : null}
-                ref={audioElement}
-                onEnded={nextSong}
-                loop
-              ></audio>
-            ) : (
-              <audio
-                onLoadedMetadata={onLoadedMetadata}
-                src={currentSong ? currentSong.src : null}
-                ref={audioElement}
-                onEnded={nextSong}
-              ></audio>
-            )}
-            {currentSong && (
-              <ControlTab
-                duration={duration}
-                setTimeProgress={setTimeProgress}
-                audioElement={audioElement}
-              />
-            )}
-          </div>
-        </>
+              )}
+            </div>
+          </>
+        )
       ) : (
         <AnimatePresence mode="wait">
           <Routes key={location.pathname} location={location}>
