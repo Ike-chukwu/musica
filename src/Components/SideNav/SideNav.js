@@ -1,10 +1,11 @@
 import React, { useContext, useRef, useEffect } from "react";
 import "./SideNav.scss";
 import { AuthContext } from "../context";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
-const SideNav = () => {
-  const { isSideNavActive, setSideNav } = useContext(AuthContext);
+const SideNav = (props) => {
+  const { isSideNavActive, setSideNav, user, logout, username, audioElement } =
+    useContext(AuthContext);
 
   const sideNavRef = useRef(null);
 
@@ -27,6 +28,20 @@ const SideNav = () => {
 
   const currentRoute = (path) => {
     return location.pathname == path;
+  };
+
+  const navigate = useNavigate();
+
+  const handleLogout = async (e) => {
+    try {
+      audioElement.current = null;
+      await logout();
+      navigate("/");
+      props.setLog(false);
+      localStorage.setItem("loggedIn", false);
+      localStorage.setItem("status", "signedOut");
+      console.log(props.loggedIn);
+    } catch (e) {}
   };
 
   return (
@@ -57,7 +72,7 @@ const SideNav = () => {
             <span className="name">my collections</span>
           </li>
         </Link>
-        <Link to='/radio' onClick={() => setSideNav(false)}>
+        <Link to="/radio" onClick={() => setSideNav(false)}>
           <li className="link">
             <i
               className={
@@ -69,7 +84,7 @@ const SideNav = () => {
             <span className="name">radio</span>
           </li>
         </Link>
-        <Link to='/video' onClick={() => setSideNav(false)}>
+        <Link to="/video" onClick={() => setSideNav(false)}>
           <li className="link">
             <i
               className={
@@ -96,7 +111,9 @@ const SideNav = () => {
         <Link onClick={() => setSideNav(false)}>
           <li className="link">
             <i className="fas fa-sign-out"></i>
-            <span className="name">log out</span>
+            <span className="name" onClick={handleLogout}>
+              log out
+            </span>
           </li>
         </Link>
       </ul>

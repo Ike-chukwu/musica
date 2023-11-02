@@ -45,20 +45,17 @@ function App() {
 
   useEffect(() => {
     // const unsubscribe = onAuthStateChanged((user) => {
-      if (user) {
-        setLogin(true);
-        setState("signedIn");
+    if (user) {
+      setLogin(true);
+      setState("signedIn");
 
-        localStorage.setItem("loggedIn", "true");
-      } else {
-        setLogin(false);
-        setState("");
+      localStorage.setItem("loggedIn", "true");
+    } else {
+      setLogin(false);
+      setState("");
 
-        localStorage.removeItem("loggedIn");
-      }
-   
-
-    // return () => unsubscribe();
+      localStorage.removeItem("loggedIn");
+    }
   }, []);
 
   const onLoadedMetadata = () => {
@@ -80,9 +77,9 @@ function App() {
         ) : (
           <>
             <Navbar />
-            <SideNav />
+            <SideNav setLog={setLogin} loggedIn={loggedIn} />
             <div className="ex">
-              <Sidebar />
+              <Sidebar setLog={setLogin} loggedIn={loggedIn} />
               <AnimatePresence mode="wait">
                 <Routes key={location.pathname} location={location}>
                   <Route path="/" element={<Home />} />

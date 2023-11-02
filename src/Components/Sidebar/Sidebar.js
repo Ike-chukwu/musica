@@ -1,9 +1,25 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./Sidebar.scss";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../context";
 
-const Sidebar = () => {
+const Sidebar = (props) => {
   const location = useLocation();
+  const navigate = useNavigate();
+  const {  logout, audioElement } =
+    useContext(AuthContext);
+
+  const handleLogout = async (e) => {
+    try {
+      audioElement.current = null;
+      await logout();
+      navigate("/");
+      props.setLog(false);
+      localStorage.setItem("loggedIn", false);
+      localStorage.setItem("status", "signedOut");
+      console.log(props.loggedIn);
+    } catch (e) {}
+  };
 
   const currentRoute = (path) => {
     return location.pathname == path;
@@ -26,14 +42,14 @@ const Sidebar = () => {
             }
           ></i>
         </Link>
-        <Link to='/radio'>
+        <Link to="/radio">
           <i
             className={
               currentRoute("/radio") ? "fas fa-radio selected" : "fas fa-radio"
             }
           ></i>
         </Link>
-        <Link to='/video'>
+        <Link to="/video">
           <i
             className={
               currentRoute("/video") ? "fas fa-video selected" : "fas fa-video"
@@ -49,7 +65,7 @@ const Sidebar = () => {
             }
           ></i>
         </Link>
-        <i className="fas fa-sign-in"></i>
+        <i className="fas fa-sign-in" onClick={handleLogout}></i>
       </div>
     </div>
   );

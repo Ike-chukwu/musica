@@ -18,7 +18,6 @@ const Profile = (props) => {
       localStorage.setItem("status", "signedOut");
       console.log(props.loggedIn);
     } catch (e) {
-      console.log(e.message);
     }
   };
   
