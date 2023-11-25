@@ -38,7 +38,7 @@ const SideNav = (props) => {
       await logout();
       navigate("/");
       props.setLog(false);
-      localStorage.setItem("loggedIn", false);
+      localStorage.setItem("loggedIn", "false");
       localStorage.setItem("status", "signedOut");
       console.log(props.loggedIn);
     } catch (e) {}

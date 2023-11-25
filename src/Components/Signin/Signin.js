@@ -38,13 +38,13 @@ const Signin = (props) => {
     try {
       await signIn(email, password);
       props.setLog(true);
-      localStorage.setItem("loggedIn", true);
+      localStorage.setItem("loggedIn", "true");
       localStorage.setItem("status", "signedIn");
       navigate("/");
       setLoading(false);
     } catch (e) {
       setError(e.message);
-      setLoading(false);
+      setLoading("false");
     }
   };
 

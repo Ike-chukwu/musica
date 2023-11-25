@@ -14,10 +14,9 @@ const Sidebar = (props) => {
       audioElement.current = null;
       await logout();
       navigate("/");
-      props.setLog(false);
-      localStorage.setItem("loggedIn", false);
+      props.setLog("false");
+      localStorage.setItem("loggedIn", "false");
       localStorage.setItem("status", "signedOut");
-      console.log(props.loggedIn);
     } catch (e) {}
   };
 

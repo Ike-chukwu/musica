@@ -19,6 +19,7 @@ import { AnimatePresence } from "framer-motion";
 import { useLocation } from "react-router-dom";
 import Loader from "./Components/Loader/Loader";
 import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "./Firebase";
 
 function App() {
   const status = localStorage.getItem("status") || "";
@@ -44,19 +45,23 @@ function App() {
   } = useContext(AuthContext);
 
   useEffect(() => {
-    // const unsubscribe = onAuthStateChanged((user) => {
-    if (user) {
-      setLogin(true);
-      setState("signedIn");
+    console.log(state, loggedIn, user);
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        setLogin(true);
+        setState("signedIn");
 
-      localStorage.setItem("loggedIn", "true");
-    } else {
-      setLogin(false);
-      setState("");
+        localStorage.setItem("loggedIn", "true");
+      } else {
+        setLogin("false");
+        setState("");
 
-      localStorage.removeItem("loggedIn");
-    }
-  }, []);
+        localStorage.removeItem("loggedIn");
+      }
+    });
+
+    return () => unsubscribe();
+  }, [user]);
 
   const onLoadedMetadata = () => {
     const seconds = audioElement.current.duration;
@@ -71,7 +76,7 @@ function App() {
 
   return (
     <div className="App">
-      {loggedIn && state == "signedIn" ? (
+      {loggedIn && status == "signedIn" ? (
         loading || firstPlaylistloading || secondPlaylistloading ? (
           <Loader />
         ) : (

@@ -37,7 +37,6 @@ const Signup = () => {
     const email = data.email;
     const password = data.password;
     const username = data.username;
-    console.log(username);
     try {
       await createUser(email, password);
       setUsername(username);
