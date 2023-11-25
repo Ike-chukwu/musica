@@ -45,12 +45,13 @@ function App() {
   } = useContext(AuthContext);
 
   useEffect(() => {
-    console.log(state, loggedIn, user);
+    // console.log(state, loggedIn, user);
     const unsubscribe = auth.onAuthStateChanged((user) => {
-      if (user) {
+      if (user && status && loginState) {
+        console.log(loggedIn);
         setLogin(true);
         setState("signedIn");
-
+        console.log(state, loggedIn, user);
         localStorage.setItem("loggedIn", "true");
       } else {
         setLogin("false");
@@ -59,9 +60,8 @@ function App() {
         localStorage.removeItem("loggedIn");
       }
     });
-
     return () => unsubscribe();
-  }, [user]);
+  }, []);
 
   const onLoadedMetadata = () => {
     const seconds = audioElement.current.duration;
