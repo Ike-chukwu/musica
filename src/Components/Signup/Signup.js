@@ -111,12 +111,9 @@ const Signup = () => {
               <p style={{ color: "red", fontSize: "1.4rem" }}>{error}</p>
             )}
           </form>
-          <span>
-            Already have an account?{" "}
-            <Link to="/" style={{ color: "white" }}>
-              Sign in
-            </Link>
-          </span>
+          <Link to="/" style={{ color: "white" }}>
+            <span>Already have an account? Sign in</span>
+          </Link>
         </div>
       </div>
     </AnimateFromRight>

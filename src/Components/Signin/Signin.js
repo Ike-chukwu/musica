@@ -5,7 +5,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../context";
 import AnimateFromRight from "../AnimateFromRight/AnimateFromRight";
 
-
 const Signin = (props) => {
   const { signIn } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
@@ -95,12 +94,9 @@ const Signin = (props) => {
               <p style={{ color: "red", fontSize: "1.4rem" }}>{error}</p>
             )}
           </form>
-          <span>
-            Don't have an account?{" "}
-            <Link to="/signup" style={{ color: "white" }}>
-              Sign Up
-            </Link>
-          </span>
+          <Link to="/signup" style={{ color: "white" }}>
+            <span>Don't have an account? Sign Up</span>
+          </Link>
         </div>
       </div>
     </AnimateFromRight>
