@@ -18,7 +18,6 @@ import UnderConstruction from "./Components/UnderConstructionPage/UnderConstruct
 import { AnimatePresence } from "framer-motion";
 import { useLocation } from "react-router-dom";
 import Loader from "./Components/Loader/Loader";
-import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "./Firebase";
 
 function App() {
